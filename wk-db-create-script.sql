@@ -1,7 +1,7 @@
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`category`
+-- Table `category`
 -- -----------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `category` (
   `id` INT NOT NULL AUTO_INCREMENT ,
@@ -11,7 +11,7 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`company`
+-- Table `company`
 -- -----------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `company` (
   `id` INT NOT NULL AUTO_INCREMENT ,
@@ -21,18 +21,19 @@ CREATE  TABLE IF NOT EXISTS `company` (
   INDEX `fk_company_category_idx` (`category_id` ASC) ,
   CONSTRAINT `fk_company_category`
     FOREIGN KEY (`category_id` )
-    REFERENCES `mydb`.`category` (`id` )
+    REFERENCES `category` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`location`
+-- Table `location`
 -- -----------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `location` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `company_id` INT NOT NULL ,
+  `loc_name` VARCHAR(45) NOT NULL,
   `street1` VARCHAR(45) NOT NULL ,
   `street2` VARCHAR(45) NULL ,
   `city` VARCHAR(45) NULL ,
@@ -44,14 +45,14 @@ CREATE  TABLE IF NOT EXISTS `location` (
   INDEX `fk_location_company1_idx` (`company_id` ASC) ,
   CONSTRAINT `fk_location_company1`
     FOREIGN KEY (`company_id` )
-    REFERENCES `mydb`.`company` (`id` )
+    REFERENCES `company` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`service`
+-- Table `service`
 -- -----------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `service` (
   `id` INT NOT NULL AUTO_INCREMENT ,
@@ -61,14 +62,14 @@ CREATE  TABLE IF NOT EXISTS `service` (
   INDEX `fk_service_company1_idx` (`company_id` ASC) ,
   CONSTRAINT `fk_service_company1`
     FOREIGN KEY (`company_id` )
-    REFERENCES `mydb`.`company` (`id` )
+    REFERENCES `company` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`person`
+-- Table `person`
 -- -----------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `person` (
   `id` INT NOT NULL AUTO_INCREMENT COMMENT 'A person can be both a consumer and a company contact.' ,
@@ -89,7 +90,7 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`favorite`
+-- Table `favorite`
 -- -----------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `favorite` (
   `location_id` INT NOT NULL ,
@@ -99,19 +100,19 @@ CREATE  TABLE IF NOT EXISTS `favorite` (
   INDEX `fk_favorite_person1_idx` (`person_id` ASC) ,
   CONSTRAINT `fk_location_has_consumer_location1`
     FOREIGN KEY (`location_id` )
-    REFERENCES `mydb`.`location` (`id` )
+    REFERENCES `location` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_favorite_person1`
     FOREIGN KEY (`person_id` )
-    REFERENCES `mydb`.`person` (`id` )
+    REFERENCES `person` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`service_location`
+-- Table `service_location`
 -- -----------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `service_location` (
   `id` INT NOT NULL AUTO_INCREMENT ,
@@ -125,19 +126,19 @@ CREATE  TABLE IF NOT EXISTS `service_location` (
   INDEX `fk_location_has_service_location1_idx` (`location_id` ASC) ,
   CONSTRAINT `fk_location_has_service_location1`
     FOREIGN KEY (`location_id` )
-    REFERENCES `mydb`.`location` (`id` )
+    REFERENCES `location` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_location_has_service_service1`
     FOREIGN KEY (`service_id` )
-    REFERENCES `mydb`.`service` (`id` )
+    REFERENCES `service` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`service_watch`
+-- Table `service_watch`
 -- -----------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `service_watch` (
   `service_location_id` INT NOT NULL ,
@@ -147,19 +148,19 @@ CREATE  TABLE IF NOT EXISTS `service_watch` (
   INDEX `fk_service_watch_person1_idx` (`person_id` ASC) ,
   CONSTRAINT `fk_service_watch_service_location1`
     FOREIGN KEY (`service_location_id` )
-    REFERENCES `mydb`.`service_location` (`id` )
+    REFERENCES `service_location` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_service_watch_person1`
     FOREIGN KEY (`person_id` )
-    REFERENCES `mydb`.`person` (`id` )
+    REFERENCES `person` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`company_contact`
+-- Table `company_contact`
 -- -----------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `company_contact` (
   `company_id` INT NOT NULL ,
@@ -170,12 +171,12 @@ CREATE  TABLE IF NOT EXISTS `company_contact` (
   INDEX `fk_company_has_person_company1_idx` (`company_id` ASC) ,
   CONSTRAINT `fk_company_has_person_company1`
     FOREIGN KEY (`company_id` )
-    REFERENCES `mydb`.`company` (`id` )
+    REFERENCES `company` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_company_has_person_person1`
     FOREIGN KEY (`person_id` )
-    REFERENCES `mydb`.`person` (`id` )
+    REFERENCES `person` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
