@@ -23,3 +23,6 @@
 
 # Ignore my local notes
 /instructions.txt
+
+# Ignore windows gemfile lock
+/Gemfile.lock
