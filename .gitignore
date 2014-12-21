@@ -14,3 +14,12 @@
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
+
+# Ignore local database files
+/database
+
+# Ignore local SSL cert fix file
+/cacert.pem
+
+# Ignore my local notes
+/instructions.txt
