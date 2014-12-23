@@ -19,10 +19,10 @@
 /database
 
 # Ignore local SSL cert fix file
-/cacert.pem
+cacert.pem
 
 # Ignore my local notes
-/instructions.txt
+instructions.txt
 
 # Ignore windows gemfile lock
-/Gemfile.lock
+Gemfile.lock
