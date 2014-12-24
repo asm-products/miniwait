@@ -6,6 +6,8 @@ Rails.application.routes.draw do
 
   get 'home' => 'home#index'
 
+  get 'category/index' => 'category#index'
+
 #  resources :widgets
 
   # The priority is based upon order of creation: first created -> highest priority.

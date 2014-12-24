@@ -1,0 +1,15 @@
+<h2>Categories</h2>
+<div class="category_list">
+	<ul>
+<%
+@categories.each do |cat|
+%>
+	  <li>
+		<%= cat.description %>
+	  </li>
+
+<%
+end
+%>	
+	</ul>
+</div>

@@ -36,7 +36,6 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.8.0)
-    cowsay (0.2.0)
     daemons (1.1.9)
     erubis (2.7.0)
     eventmachine (1.0.4)
@@ -82,12 +81,6 @@ GEM
     rake (10.4.2)
     rdoc (4.2.0)
       json (~> 1.4)
-    sass (3.2.19)
-    sass-rails (4.0.5)
-      railties (>= 4.0.0, < 5.0)
-      sass (~> 3.2.2)
-      sprockets (~> 2.8, < 3.0)
-      sprockets-rails (~> 2.0)
     sdoc (0.4.1)
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
@@ -122,14 +115,11 @@ PLATFORMS
   x64-mingw32
 
 DEPENDENCIES
-  coffee-rails (~> 4.0.0)
-  cowsay
   jbuilder (~> 2.0)
   jquery-rails
   pg
   rails (= 4.1.8)
   rails_12factor
-  sass-rails (~> 4.0.3)
   sdoc (~> 0.4.0)
   spring
   thin
