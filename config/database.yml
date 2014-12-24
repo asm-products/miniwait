@@ -24,8 +24,8 @@ default: &default
 development:
   <<: *default
   database: wait-killer
-  username: postgres
-  password: admin
+  username: admin
+  password: wkadmin
   host: localhost
 
   # The specified database role being used to connect to postgres.

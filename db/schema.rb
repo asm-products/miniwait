@@ -16,25 +16,25 @@ ActiveRecord::Schema.define(version: 20140707111715) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "category", force: true do |t|
+  create_table "categories", force: true do |t|
     t.string "description", limit: 80, null: false
   end
 
-  create_table "company", force: true do |t|
+  create_table "companies", force: true do |t|
     t.integer "category_id",            null: false
     t.string  "name",        limit: 80, null: false
   end
 
-  create_table "company_contact", primary_key: "company_id", force: true do |t|
+  create_table "company_contacts", primary_key: "company_id", force: true do |t|
     t.integer "person_id",                  null: false
     t.boolean "is_primary", default: false
   end
 
-  create_table "favorite", primary_key: "location_id", force: true do |t|
+  create_table "favorites", primary_key: "location_id", force: true do |t|
     t.integer "person_id", null: false
   end
 
-  create_table "location", force: true do |t|
+  create_table "locations", force: true do |t|
     t.integer "company_id",                null: false
     t.string  "street1",        limit: 45, null: false
     t.string  "street2",        limit: 45
@@ -45,7 +45,7 @@ ActiveRecord::Schema.define(version: 20140707111715) do
     t.string  "phone_number",   limit: 12
   end
 
-  create_table "person", force: true do |t|
+  create_table "people", force: true do |t|
     t.string "username",       limit: 45,  null: false
     t.string "email_address",  limit: 90,  null: false
     t.string "first_name",     limit: 20,  null: false
@@ -60,12 +60,13 @@ ActiveRecord::Schema.define(version: 20140707111715) do
     t.string "password",       limit: 100, null: false
   end
 
-  create_table "service", force: true do |t|
+  create_table "services", force: true do |t|
     t.integer "company_id",           null: false
+    t.string  "description", limit: 45, null: false
     t.string  "is_primary", limit: 1
   end
 
-  create_table "service_location", force: true do |t|
+  create_table "service_locations", force: true do |t|
     t.integer  "location_id",                      null: false
     t.integer  "service_id",                       null: false
     t.boolean  "is_available_here", default: true, null: false
@@ -73,16 +74,8 @@ ActiveRecord::Schema.define(version: 20140707111715) do
     t.datetime "wait_time_updated"
   end
 
-  create_table "service_watch", primary_key: "service_location_id", force: true do |t|
+  create_table "service_watches", primary_key: "service_location_id", force: true do |t|
     t.integer "person_id", null: false
-  end
-
-  create_table "widgets", force: true do |t|
-    t.string   "name"
-    t.text     "description"
-    t.integer  "stock"
-    t.datetime "created_at"
-    t.datetime "updated_at"
   end
 
 end
