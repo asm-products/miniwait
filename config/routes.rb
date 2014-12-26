@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   get 'home/index' => 'home#index'
 
   get 'home' => 'home#index'
+  
+  get '/' => 'home#index'
 
   get 'category/index' => 'category#index'
 

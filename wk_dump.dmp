@@ -1,0 +1,635 @@
+--
+-- PostgreSQL database dump
+--
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+
+--
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+
+SET search_path = public, pg_catalog;
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- Name: categories; Type: TABLE; Schema: public; Owner: Michael; Tablespace: 
+--
+
+CREATE TABLE categories (
+    id integer NOT NULL,
+    description character varying(80) NOT NULL
+);
+
+
+
+--
+-- Name: categories_id_seq; Type: SEQUENCE; Schema: public; Owner: Michael
+--
+
+CREATE SEQUENCE categories_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+
+--
+-- Name: categories_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: Michael
+--
+
+ALTER SEQUENCE categories_id_seq OWNED BY categories.id;
+
+
+--
+-- Name: companies; Type: TABLE; Schema: public; Owner: Michael; Tablespace: 
+--
+
+CREATE TABLE companies (
+    id integer NOT NULL,
+    category_id integer NOT NULL,
+    name character varying(80) NOT NULL
+);
+
+
+
+--
+-- Name: companies_id_seq; Type: SEQUENCE; Schema: public; Owner: Michael
+--
+
+CREATE SEQUENCE companies_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+
+--
+-- Name: companies_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: Michael
+--
+
+ALTER SEQUENCE companies_id_seq OWNED BY companies.id;
+
+
+--
+-- Name: company_contacts; Type: TABLE; Schema: public; Owner: Michael; Tablespace: 
+--
+
+CREATE TABLE company_contacts (
+    company_id integer NOT NULL,
+    person_id integer NOT NULL,
+    is_primary boolean DEFAULT false
+);
+
+
+--
+-- Name: company_contacts_company_id_seq; Type: SEQUENCE; Schema: public; Owner: Michael
+--
+
+CREATE SEQUENCE company_contacts_company_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+
+--
+-- Name: company_contacts_company_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: Michael
+--
+
+ALTER SEQUENCE company_contacts_company_id_seq OWNED BY company_contacts.company_id;
+
+
+--
+-- Name: favorites; Type: TABLE; Schema: public; Owner: Michael; Tablespace: 
+--
+
+CREATE TABLE favorites (
+    location_id integer NOT NULL,
+    person_id integer NOT NULL
+);
+
+
+
+--
+-- Name: favorites_location_id_seq; Type: SEQUENCE; Schema: public; Owner: Michael
+--
+
+CREATE SEQUENCE favorites_location_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+
+--
+-- Name: favorites_location_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: Michael
+--
+
+ALTER SEQUENCE favorites_location_id_seq OWNED BY favorites.location_id;
+
+
+--
+-- Name: locations; Type: TABLE; Schema: public; Owner: Michael; Tablespace: 
+--
+
+CREATE TABLE locations (
+    id integer NOT NULL,
+    company_id integer NOT NULL,
+    street1 character varying(45) NOT NULL,
+    street2 character varying(45),
+    city character varying(45),
+    state_province character varying(45),
+    postal_code character varying(10),
+    country character varying(45),
+    phone_number character varying(12)
+);
+
+
+
+--
+-- Name: locations_id_seq; Type: SEQUENCE; Schema: public; Owner: Michael
+--
+
+CREATE SEQUENCE locations_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: locations_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: Michael
+--
+
+ALTER SEQUENCE locations_id_seq OWNED BY locations.id;
+
+
+--
+-- Name: people; Type: TABLE; Schema: public; Owner: Michael; Tablespace: 
+--
+
+CREATE TABLE people (
+    id integer NOT NULL,
+    username character varying(45) NOT NULL,
+    email_address character varying(90) NOT NULL,
+    first_name character varying(20) NOT NULL,
+    last_name character varying(30) NOT NULL,
+    street1 character varying(45),
+    street2 character varying(45),
+    city character varying(45),
+    state_province character varying(45),
+    postal_code character varying(10),
+    country character varying(45),
+    phone_number character varying(12),
+    password character varying(100) NOT NULL
+);
+
+--
+-- Name: people_id_seq; Type: SEQUENCE; Schema: public; Owner: Michael
+--
+
+CREATE SEQUENCE people_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: people_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: Michael
+--
+
+ALTER SEQUENCE people_id_seq OWNED BY people.id;
+
+
+--
+-- Name: schema_migrations; Type: TABLE; Schema: public; Owner: Michael; Tablespace: 
+--
+
+CREATE TABLE schema_migrations (
+    version character varying(255) NOT NULL
+);
+
+
+--
+-- Name: service_locations; Type: TABLE; Schema: public; Owner: Michael; Tablespace: 
+--
+
+CREATE TABLE service_locations (
+    id integer NOT NULL,
+    location_id integer NOT NULL,
+    service_id integer NOT NULL,
+    is_available_here boolean DEFAULT true NOT NULL,
+    wait_time integer NOT NULL,
+    wait_time_updated timestamp without time zone
+);
+
+
+--
+-- Name: service_locations_id_seq; Type: SEQUENCE; Schema: public; Owner: Michael
+--
+
+CREATE SEQUENCE service_locations_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: service_locations_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: Michael
+--
+
+ALTER SEQUENCE service_locations_id_seq OWNED BY service_locations.id;
+
+
+--
+-- Name: service_watches; Type: TABLE; Schema: public; Owner: Michael; Tablespace: 
+--
+
+CREATE TABLE service_watches (
+    service_location_id integer NOT NULL,
+    person_id integer NOT NULL
+);
+
+--
+-- Name: service_watches_service_location_id_seq; Type: SEQUENCE; Schema: public; Owner: Michael
+--
+
+CREATE SEQUENCE service_watches_service_location_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+--
+-- Name: service_watches_service_location_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: Michael
+--
+
+ALTER SEQUENCE service_watches_service_location_id_seq OWNED BY service_watches.service_location_id;
+
+
+--
+-- Name: services; Type: TABLE; Schema: public; Owner: Michael; Tablespace: 
+--
+
+CREATE TABLE services (
+    id integer NOT NULL,
+    company_id integer NOT NULL,
+    description character varying(45) NOT NULL,
+    is_primary character varying(1)
+);
+
+
+--
+-- Name: services_id_seq; Type: SEQUENCE; Schema: public; Owner: Michael
+--
+
+CREATE SEQUENCE services_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: services_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: Michael
+--
+
+ALTER SEQUENCE services_id_seq OWNED BY services.id;
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: Michael
+--
+
+ALTER TABLE ONLY categories ALTER COLUMN id SET DEFAULT nextval('categories_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: Michael
+--
+
+ALTER TABLE ONLY companies ALTER COLUMN id SET DEFAULT nextval('companies_id_seq'::regclass);
+
+
+--
+-- Name: company_id; Type: DEFAULT; Schema: public; Owner: Michael
+--
+
+ALTER TABLE ONLY company_contacts ALTER COLUMN company_id SET DEFAULT nextval('company_contacts_company_id_seq'::regclass);
+
+
+--
+-- Name: location_id; Type: DEFAULT; Schema: public; Owner: Michael
+--
+
+ALTER TABLE ONLY favorites ALTER COLUMN location_id SET DEFAULT nextval('favorites_location_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: Michael
+--
+
+ALTER TABLE ONLY locations ALTER COLUMN id SET DEFAULT nextval('locations_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: Michael
+--
+
+ALTER TABLE ONLY people ALTER COLUMN id SET DEFAULT nextval('people_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: Michael
+--
+
+ALTER TABLE ONLY service_locations ALTER COLUMN id SET DEFAULT nextval('service_locations_id_seq'::regclass);
+
+
+--
+-- Name: service_location_id; Type: DEFAULT; Schema: public; Owner: Michael
+--
+
+ALTER TABLE ONLY service_watches ALTER COLUMN service_location_id SET DEFAULT nextval('service_watches_service_location_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: Michael
+--
+
+ALTER TABLE ONLY services ALTER COLUMN id SET DEFAULT nextval('services_id_seq'::regclass);
+
+
+--
+-- Data for Name: categories; Type: TABLE DATA; Schema: public; Owner: Michael
+--
+
+COPY categories (id, description) FROM stdin;
+1	Automotive
+2	Healthcare
+3	Retail
+\.
+
+
+--
+-- Name: categories_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Michael
+--
+
+SELECT pg_catalog.setval('categories_id_seq', 3, true);
+
+
+--
+-- Data for Name: companies; Type: TABLE DATA; Schema: public; Owner: Michael
+--
+
+COPY companies (id, category_id, name) FROM stdin;
+\.
+
+
+--
+-- Name: companies_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Michael
+--
+
+SELECT pg_catalog.setval('companies_id_seq', 1, false);
+
+
+--
+-- Data for Name: company_contacts; Type: TABLE DATA; Schema: public; Owner: Michael
+--
+
+COPY company_contacts (company_id, person_id, is_primary) FROM stdin;
+\.
+
+
+--
+-- Name: company_contacts_company_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Michael
+--
+
+SELECT pg_catalog.setval('company_contacts_company_id_seq', 1, false);
+
+
+--
+-- Data for Name: favorites; Type: TABLE DATA; Schema: public; Owner: Michael
+--
+
+COPY favorites (location_id, person_id) FROM stdin;
+\.
+
+
+--
+-- Name: favorites_location_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Michael
+--
+
+SELECT pg_catalog.setval('favorites_location_id_seq', 1, false);
+
+
+--
+-- Data for Name: locations; Type: TABLE DATA; Schema: public; Owner: Michael
+--
+
+COPY locations (id, company_id, street1, street2, city, state_province, postal_code, country, phone_number) FROM stdin;
+\.
+
+
+--
+-- Name: locations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Michael
+--
+
+SELECT pg_catalog.setval('locations_id_seq', 1, false);
+
+
+--
+-- Data for Name: people; Type: TABLE DATA; Schema: public; Owner: Michael
+--
+
+COPY people (id, username, email_address, first_name, last_name, street1, street2, city, state_province, postal_code, country, phone_number, password) FROM stdin;
+\.
+
+
+--
+-- Name: people_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Michael
+--
+
+SELECT pg_catalog.setval('people_id_seq', 1, false);
+
+
+--
+-- Data for Name: schema_migrations; Type: TABLE DATA; Schema: public; Owner: Michael
+--
+
+COPY schema_migrations (version) FROM stdin;
+20140707111715
+\.
+
+
+--
+-- Data for Name: service_locations; Type: TABLE DATA; Schema: public; Owner: Michael
+--
+
+COPY service_locations (id, location_id, service_id, is_available_here, wait_time, wait_time_updated) FROM stdin;
+\.
+
+
+--
+-- Name: service_locations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Michael
+--
+
+SELECT pg_catalog.setval('service_locations_id_seq', 1, false);
+
+
+--
+-- Data for Name: service_watches; Type: TABLE DATA; Schema: public; Owner: Michael
+--
+
+COPY service_watches (service_location_id, person_id) FROM stdin;
+\.
+
+
+--
+-- Name: service_watches_service_location_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Michael
+--
+
+SELECT pg_catalog.setval('service_watches_service_location_id_seq', 1, false);
+
+
+--
+-- Data for Name: services; Type: TABLE DATA; Schema: public; Owner: Michael
+--
+
+COPY services (id, company_id, description, is_primary) FROM stdin;
+\.
+
+
+--
+-- Name: services_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Michael
+--
+
+SELECT pg_catalog.setval('services_id_seq', 1, false);
+
+
+--
+-- Name: categories_pkey; Type: CONSTRAINT; Schema: public; Owner: Michael; Tablespace: 
+--
+
+ALTER TABLE ONLY categories
+    ADD CONSTRAINT categories_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: companies_pkey; Type: CONSTRAINT; Schema: public; Owner: Michael; Tablespace: 
+--
+
+ALTER TABLE ONLY companies
+    ADD CONSTRAINT companies_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: company_contacts_pkey; Type: CONSTRAINT; Schema: public; Owner: Michael; Tablespace: 
+--
+
+ALTER TABLE ONLY company_contacts
+    ADD CONSTRAINT company_contacts_pkey PRIMARY KEY (company_id);
+
+
+--
+-- Name: favorites_pkey; Type: CONSTRAINT; Schema: public; Owner: Michael; Tablespace: 
+--
+
+ALTER TABLE ONLY favorites
+    ADD CONSTRAINT favorites_pkey PRIMARY KEY (location_id);
+
+
+--
+-- Name: locations_pkey; Type: CONSTRAINT; Schema: public; Owner: Michael; Tablespace: 
+--
+
+ALTER TABLE ONLY locations
+    ADD CONSTRAINT locations_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: people_pkey; Type: CONSTRAINT; Schema: public; Owner: Michael; Tablespace: 
+--
+
+ALTER TABLE ONLY people
+    ADD CONSTRAINT people_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: service_locations_pkey; Type: CONSTRAINT; Schema: public; Owner: Michael; Tablespace: 
+--
+
+ALTER TABLE ONLY service_locations
+    ADD CONSTRAINT service_locations_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: service_watches_pkey; Type: CONSTRAINT; Schema: public; Owner: Michael; Tablespace: 
+--
+
+ALTER TABLE ONLY service_watches
+    ADD CONSTRAINT service_watches_pkey PRIMARY KEY (service_location_id);
+
+
+--
+-- Name: services_pkey; Type: CONSTRAINT; Schema: public; Owner: Michael; Tablespace: 
+--
+
+ALTER TABLE ONLY services
+    ADD CONSTRAINT services_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: unique_schema_migrations; Type: INDEX; Schema: public; Owner: Michael; Tablespace: 
+--
+
+CREATE UNIQUE INDEX unique_schema_migrations ON schema_migrations USING btree (version);
+
+
+--
+-- Name: public; Type: ACL; Schema: -; Owner: postgres
+--
+
+REVOKE ALL ON SCHEMA public FROM PUBLIC;
+REVOKE ALL ON SCHEMA public FROM postgres;
+GRANT ALL ON SCHEMA public TO postgres;
+GRANT ALL ON SCHEMA public TO PUBLIC;
+
+
+--
+-- PostgreSQL database dump complete
+--
+

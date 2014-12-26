@@ -26,3 +26,7 @@ instructions.txt
 
 # Ignore windows gemfile lock
 Gemfile.lock
+
+# Ignore local dump of heroku credentials
+
+heroku_credentials.txt
