@@ -46,7 +46,7 @@ GEM
     mime-types (2.4.3)
     minitest (5.5.0)
     multi_json (1.10.1)
-    pg (0.17.1)
+    pg (0.18.0.pre20141117110243-x64-mingw32)
     rack (1.5.2)
     rack-test (0.6.2)
       rack (>= 1.0)
@@ -63,7 +63,7 @@ GEM
     rails_12factor (0.0.3)
       rails_serve_static_assets
       rails_stdout_logging
-    rails_serve_static_assets (0.0.2)
+    rails_serve_static_assets (0.0.3)
     rails_stdout_logging (0.0.3)
     railties (4.1.8)
       actionpack (= 4.1.8)
@@ -98,7 +98,7 @@ PLATFORMS
 DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
-  pg
+  pg (= 0.18.0.pre20141117110243)
   rails (= 4.1.8)
   rails_12factor
   thin

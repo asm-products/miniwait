@@ -4,11 +4,7 @@ source 'https://rubygems.org'
 gem 'rails', '4.1.8'
 
 # Use PostgreSQL as the database for Active Record
-gem 'pg'
-
-group :production do
-   gem 'rails_12factor'
-end
+gem 'pg', '0.18.0.pre20141117110243'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
@@ -20,10 +16,11 @@ gem 'jbuilder', '~> 2.0'
 group :development do
    gem 'thin'
 end
-# group :production do
-#   gem 'unicorn'
-# end
 
 # Need time zone info
 gem 'tzinfo-data'
 
+group :production do
+   gem 'rails_12factor'
+#   gem 'unicorn'
+end
