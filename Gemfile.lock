@@ -32,6 +32,7 @@ GEM
     daemons (1.1.9)
     erubis (2.7.0)
     eventmachine (1.0.4)
+    execjs (2.2.2)
     hike (1.2.3)
     i18n (0.7.0)
     jbuilder (2.2.6)
@@ -91,6 +92,9 @@ GEM
       thread_safe (~> 0.1)
     tzinfo-data (1.2014.10)
       tzinfo (>= 1.0.0)
+    uglifier (2.6.0)
+      execjs (>= 0.3.0)
+      json (>= 1.8.0)
 
 PLATFORMS
   x64-mingw32
@@ -103,3 +107,4 @@ DEPENDENCIES
   rails_12factor
   thin
   tzinfo-data
+  uglifier
