@@ -15,14 +15,14 @@ gem 'jbuilder', '~> 2.0'
 gem 'uglifier'
 
 # Specify the app server
-group :development do
+#group :development do
    gem 'thin'
-end
+#end
 
 # Need time zone info
 gem 'tzinfo-data'
 
 group :production do
    gem 'rails_12factor'
-   gem 'unicorn'
+#   gem 'unicorn'
 end
