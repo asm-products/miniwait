@@ -1,0 +1,38 @@
+<div class="signup-form">
+
+<p>
+<%= form_tag({:controller => "home", :action => "signup"}, :method => "post") do %>
+
+  <% # if flash[:user_message] %> 
+    <p class="user_message"><%= flash[:user_message] %></p>
+  <% # end %> 
+  
+  <%= label_tag(:userName, "User name:", :class => 'form_label') %>
+  <%= text_field_tag(:userName, @person.username, :class => 'form_field') %>
+  <p>
+
+  <%= label_tag(:password, "Password:", :class => 'form_label') %>
+  <%= password_field_tag(:password, nil, :class => 'form_field') %>
+  <p>
+
+  <%= label_tag(:confirmPassword, "Confirm Password:", :class => 'form_label') %>
+  <%= password_field_tag(:confirmPassword, nil, :class => 'form_field') %>
+  <p>
+
+  <%= label_tag(:firstName, "First name:", :class => 'form_label') %>
+  <%= text_field_tag(:firstName, @person.first_name, :class => 'form_field') %>
+  <p>
+
+  <%= label_tag(:lastName, "Last name:", :class => 'form_label') %>
+  <%= text_field_tag(:lastName, @person.last_name, :class => 'form_field') %>
+  <p>
+
+  <%= label_tag(:emailAddress, "Email:", :class => 'form_label') %>
+  <%= text_field_tag(:emailAddress, @person.email_address, :class => 'form_field') %>
+  <p>
+
+  <%= submit_tag("Continue") %>
+  
+<% end %>
+</div>
+
