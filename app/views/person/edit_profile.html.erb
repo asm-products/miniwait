@@ -1,5 +1,56 @@
 
 <h2>Edit Profile</h2>
 
+<div class="edit-form">
 
+<p>
+<%= form_tag({:controller => "person", :action => "save_profile"}, :method => "post") do %>
+
+  <% # if flash[:user_message] %> 
+    <p class="user_message"><%= flash[:user_message] %></p>
+  <% # end %> 
+  
+  <%= label_tag(:userName, "User name:", :class => 'form_label') %>
+  <%= text_field_tag(:userName, @person.username, :class => 'form_field') %>
+  <p>
+
+   <%= label_tag(:firstName, "First name:", :class => 'form_label') %>
+  <%= text_field_tag(:firstName, @person.first_name, :class => 'form_field') %>
+  <p>
+
+  <%= label_tag(:lastName, "Last name:", :class => 'form_label') %>
+  <%= text_field_tag(:lastName, @person.last_name, :class => 'form_field') %>
+  <p>
+  
+  <%= label_tag(:emailAddress, "Email:", :class => 'form_label') %>
+  <%= text_field_tag(:emailAddress, @person.email_address, :class => 'form_field') %>
+  <p>
+
+  <%= label_tag(:phoneNumber, "Phone number:", :class => 'form_label') %>
+  <%= text_field_tag(:phoneNumber, @person.phone_number, :class => 'form_field') %>
+  <p>  
+  
+  <%= label_tag(:street1, "Street 1:", :class => 'form_label') %>
+  <%= text_field_tag(:street1, @person.street1, :class => 'form_field') %>
+  <p>
+ 
+  <%= label_tag(:street2, "Street 2:", :class => 'form_label') %>
+  <%= text_field_tag(:street2, @person.street2, :class => 'form_field') %>
+  <p>
+
+  <%= label_tag(:street1, "City, State:", :class => 'form_label') %><%= text_field_tag(:city, @person.city, :class => 'form_field') %><%= text_field_tag(:stateProvince, @person.state_province, :class => 'form_field') %>
+  <p>  
+ 
+  <%= label_tag(:postalCode, "Zip/Postal:", :class => 'form_label') %>
+  <%= text_field_tag(:postalCode, @person.postal_code, :class => 'form_field') %>
+  <p>
+  
+  <%= label_tag(:country, "Country:", :class => 'form_label') %>
+  <%= text_field_tag(:country, @person.country, :class => 'form_field') %>
+  <p>  
+  
+  <%= submit_tag("Save") %>
+  
+<% end %>
+</div>
 

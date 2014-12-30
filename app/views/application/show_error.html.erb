@@ -1,0 +1,13 @@
+<h1>OOPS!</h1>
+<div style="margin-top: 20px;">Something unexpected happened.</div>
+<div>Isn't that special?</div>
+<h2>Error</h2>
+<div style="margin-top: 20px;">
+   <div class="user_message"><%= @errorMessage %></div>
+</div>
+<h2>Stack Trace</h2>
+<div>
+   <div style="font-size:.7em;color:gray;"><%= @stackTrace %></div>
+</div>
+
+<%= link_to "Home", :controller => "home", :action => "index" %>

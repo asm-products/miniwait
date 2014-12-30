@@ -12,7 +12,11 @@ Rails.application.routes.draw do
 
   post 'home/signup'
   
-  get 'person/edit_profile' 
+  get 'person/edit_profile'
+  
+  post 'person/save_profile'
+  
+  get 'person/dashboard'
 
 
 end

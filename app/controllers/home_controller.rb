@@ -46,7 +46,7 @@ class HomeController < ApplicationController
 	end
 
     # emailAddress
-	if (params[:emailAddress].blank? || (params[:emailAddress] !=~ /^\S+@\S+\.\S+$/).blank? )
+	if (params[:emailAddress].blank? || (params[:emailAddress] !~ /^\S+@\S+\.\S+$/) )
 	   warning_messages << "Email format is invalid"
 	else
 	   person.email_address = params[:emailAddress]
@@ -54,7 +54,7 @@ class HomeController < ApplicationController
 	
 	if warning_messages.size == 0
 
-       if person_is_unique(person)	
+       if person.unique
           person.save		  
 	   else
 	      warning_messages << "User name or email has been used already"
@@ -66,6 +66,9 @@ class HomeController < ApplicationController
 	
 	      # Clear user errors
 		  flash[:user_message] = nil
+		  
+		  # Pass username to edit function
+		  session[:user_id] = person.id
 		  
 	      # Edit this user profile
           redirect_to :controller => 'person', :action => 'edit_profile'
@@ -84,13 +87,7 @@ class HomeController < ApplicationController
     end
  
  end
- 
-  def person_is_unique(person)
-     # return true if this new person is unique by: username and email_address
-	 sql = "SELECT id FROM people WHERE username = ? OR email_address = ?;"
-	 found = Person.find_by_sql [sql, person.username, person.email_address]
-	 return found.blank?
-  end
+
   
   
 end
