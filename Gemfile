@@ -17,7 +17,7 @@ gem 'uglifier'
 gem 'pony'
 
 group :development do
-   gem 'thin'
+#   gem 'thin'
    gem 'letter_opener'
 end
 
