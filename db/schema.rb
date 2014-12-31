@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140707111715) do
+ActiveRecord::Schema.define(version: 20141231230519) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,24 +46,20 @@ ActiveRecord::Schema.define(version: 20140707111715) do
   end
 
   create_table "people", force: true do |t|
-    t.string "username",       limit: 45,  null: false
-    t.string "email_address",  limit: 90,  null: false
-    t.string "first_name",     limit: 20,  null: false
-    t.string "last_name",      limit: 30,  null: false
-    t.string "street1",        limit: 45
-    t.string "street2",        limit: 45
-    t.string "city",           limit: 45
-    t.string "state_province", limit: 45
-    t.string "postal_code",    limit: 10
-    t.string "country",        limit: 45
-    t.string "phone_number",   limit: 12
-    t.string "password",       limit: 100, null: false
-  end
-
-  create_table "services", force: true do |t|
-    t.integer "company_id",           null: false
-    t.string  "description", limit: 45, null: false
-    t.string  "is_primary", limit: 1
+    t.string "username",             limit: 45,  null: false
+    t.string "email_address",        limit: 90,  null: false
+    t.string "first_name",           limit: 20,  null: false
+    t.string "last_name",            limit: 30,  null: false
+    t.string "street1",              limit: 45
+    t.string "street2",              limit: 45
+    t.string "city",                 limit: 45
+    t.string "state_province",       limit: 45
+    t.string "postal_code",          limit: 10
+    t.string "country",              limit: 45
+    t.string "phone_number",         limit: 12
+    t.string "password_hash",        limit: 100, null: false
+    t.string "password_salt"
+    t.string "password_reset_token"
   end
 
   create_table "service_locations", force: true do |t|
@@ -76,6 +72,12 @@ ActiveRecord::Schema.define(version: 20140707111715) do
 
   create_table "service_watches", primary_key: "service_location_id", force: true do |t|
     t.integer "person_id", null: false
+  end
+
+  create_table "services", force: true do |t|
+    t.integer "company_id",             null: false
+    t.string  "description", limit: 45, null: false
+    t.string  "is_primary",  limit: 1
   end
 
 end

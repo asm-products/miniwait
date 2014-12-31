@@ -1,5 +1,59 @@
 class PersonController < ApplicationController
+  
+   def login
+     #show the default view
+   end
+  
+   def logout
+      session[:user_id] = nil
+	  flash[:user_message] = "You have been logged out."
+	  redirect_to :controller => "person", :action => "login"
+   end  
+ 
+   def authenticate
+      # process the login form post and capture the logged in user if successful
+	 
+      person = Person.where(["username = ?", params[:username]]).first 
+	 
+	  if !person.blank? && (Digest::SHA256.hexdigest(params[:password] + person.password_salt) == person.password_hash)		
+	     session[:user_id] = person.id
+		 redirect_to :action => "dashboard"
+      else
+	     flash.now[:user_message] = "Invalid user name or password entered."
+		 render "login"
+	  end
+	 
+   end
+  
+   def forgot_password
+      if request.post?
+	     # Lookup username OR email_address. Finding either, send password reset link.
+		 person = Person.where(["username = ? OR email_address = ?", params[:username], params[:email_address]]).first
 
+         if person.blank?
+	        flash.now[:user_message] = "Sorry, we cannot find that user name or email address."
+         else		 
+		 
+			 # Send welcome email
+			 mailer = UserMailer.new
+			 mailer.send_password_reset_email(person)
+			 mailer = nil
+
+			 # Tell the user what we did
+			 flash[:user_message] = "We just emailed you a password reset link. Please check your email."
+			 
+		 end 
+	  end
+      # Fall through to display the form
+   end
+   
+   def change_password
+   end
+   
+   def reset_password
+      # This is where the email link comes, containing the unique reset hash to lookup
+   end
+  
   def edit_profile
      # Load person from session user id
 	 @person = Person.find(session[:user_id]) 
@@ -105,11 +159,15 @@ class PersonController < ApplicationController
 			
     end
 
-	 
-	 
   end
   
   def dashboard
+     if session[:user_id].nil?
+        flash[:user_message] = 'Dashboard only available when logged in.'
+		redirect_to :controller => 'person', :action => 'login'
+	 else
+	    @person = Person.find(session[:user_id])
+	 end
   end
   
 end

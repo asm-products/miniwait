@@ -14,10 +14,12 @@ gem 'jbuilder', '~> 2.0'
 
 gem 'uglifier'
 
-# Specify the app server
-#group :development do
+gem 'pony'
+
+group :development do
    gem 'thin'
-#end
+   gem 'letter_opener'
+end
 
 # Need time zone info
 gem 'tzinfo-data'

@@ -18,5 +18,17 @@ Rails.application.routes.draw do
   
   get 'person/dashboard'
 
+  get 'person/login'
+  
+  post 'person/authenticate'
+  
+  get  'person/forgot_password'
+  post 'person/forgot_password'
+  
+  get 'person/reset_password'
+  
+  post 'person/update_password'
+  
+  get 'person/logout'
 
 end

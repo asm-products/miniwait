@@ -3,6 +3,8 @@ class HomeController < ApplicationController
   def index
 	@person = Person.new
   end
+ 
+  
   
   def signup
     # Validate the incoming signup form parameters and create new Person record
@@ -21,7 +23,7 @@ class HomeController < ApplicationController
 	if params[:password].blank?
 	   warning_messages << "Password cannot be blank"
 	else
-	   person.password = params[:password]
+       person.password = params[:password]
 	   
 	   # confirmPassword
 	   if (params[:confirmPassword].blank? || params[:confirmPassword] != params[:password])
@@ -63,11 +65,16 @@ class HomeController < ApplicationController
 	end
 	
 	if warning_messages.size == 0
+
+          # Send welcome email
+          mailer = UserMailer.new
+          mailer.send_welcome_email(person)
+          mailer = nil
 	
 	      # Clear user errors
 		  flash[:user_message] = nil
 		  
-		  # Pass username to edit function
+		  # Pass user to edit function
 		  session[:user_id] = person.id
 		  
 	      # Edit this user profile
@@ -88,6 +95,5 @@ class HomeController < ApplicationController
  
  end
 
-  
   
 end

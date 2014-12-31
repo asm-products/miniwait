@@ -1,22 +1,32 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Wait-Killer</title>
+	<title><%= Rails.application.config.app_name %></title>
 	<%= stylesheet_link_tag "application", media: "all" %>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
-  <div class="container-fluid">
-	  <div class="navbar">
-	    <div class="navbar-inner">
-	    	<a href="/category/index">Categories</a>
-         <a href="/person/dashboard">Dashboard</a>
-	    </div>
-	  </div>
-	  
-      <%= yield %>
+       <div class="container-fluid">
 
-  <div class="footer">This is a div of class 'footer'</div>
-  </div>
+          <div class="temp_menu"> <!-- replace when styling -->
+            <ul>
+               <li><a href="/home/index">Home</a></li>		   
+               <li><a href="/person/dashboard">Dashboard</a></li>
+	    	      <li><a href="/category/index">Categories</a></li>
+			 
+             <% if session[:user_id].nil? %>
+                <li><a href="/person/login">Log In</a></li>
+             <% else %>
+                <li><a href="/person/logout">Log Out</a></li>
+             <% end %>
+
+            </ul>
+             
+	      </div>
+	  
+         <%= yield %>
+
+  	  </div>
+
 </body>
 </html>
