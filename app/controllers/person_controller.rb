@@ -84,22 +84,51 @@ class PersonController < ApplicationController
   def update_password
     # Save the new password just entered twice
 	
+	warnings = Array.new
+	
 	pw1 = params[:password]
 	pw2 = params[:password2]
 	
 	if pw1 != pw2
-	  raise 'Password values do not match.'
+	  warnings << 'Password values do not match.'
 	end
 	
-	@person = Person.find(session[:user_id])
+	msg = validate_password(pw1)
+	if msg != ""
+	   warnings << msg
+	end
 	
-	@person.password = pw1
-	@person.save
+	# We don't have to validate pw2 because of the matching rule above
+	
+	if warnings.size == 0
+	
+	   @person = Person.find(session[:user_id])
+	
+	   @person.password = pw1
+	   @person.save
 		  
-	flash[:user_message] = "Your password has been updated."
+	   flash[:user_message] = "Your password has been updated."
 	
-	redirect_to :action => 'dashboard' and return
+	   redirect_to :action => 'dashboard' and return
+	else
+
+        # Load errors array into user message
+		flash.now[:user_message] = warnings.join("; ")
+		
+		render "change_password"
+
+	end
 	
+  end
+  
+  def validate_password(password)
+     # Returns "" or an error message about the password rules
+     # regex (=~) returns the position of the matching string, so zero is good
+     if (password =~ /([a-zA-Z0-9_.@#&+=]{5,99})/) == 0
+	    return ""
+	 else
+	    return "Password must be 5+ letters, numbers or special characters (_.@#&+=)"
+	 end
   end
     
   def generate_token

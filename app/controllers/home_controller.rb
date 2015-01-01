@@ -23,12 +23,18 @@ class HomeController < ApplicationController
 	if params[:password].blank?
 	   warning_messages << "Password cannot be blank"
 	else
-       person.password = params[:password]
-	   
-	   # confirmPassword
-	   if (params[:confirmPassword].blank? || params[:confirmPassword] != params[:password])
-	      warning_messages << "Both passwords must match"
-	   end	
+	
+	   msg = validate_password(params[:password])
+	   if msg != ""
+	      warning_messages << msg
+	   else
+		   person.password = params[:password]
+		   
+		   # confirmPassword
+		   if (params[:confirmPassword].blank? || params[:confirmPassword] != params[:password])
+			  warning_messages << "Both passwords must match"
+		   end
+       end	   
 
    end
 
