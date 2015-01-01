@@ -17,7 +17,7 @@ gem 'uglifier'
 gem 'pony'
 
 group :development do
-#   gem 'thin'
+   gem 'thin'
    gem 'letter_opener'
 end
 
@@ -26,5 +26,4 @@ gem 'tzinfo-data'
 
 group :production do
    gem 'rails_12factor'
-#   gem 'unicorn'
 end
