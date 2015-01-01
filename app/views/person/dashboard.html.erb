@@ -2,3 +2,6 @@
 <h2>My Dashboard</h2>
 <p>
 <p>Welcome, <%= @person.first_name %>.</p>
+  <% # if flash[:user_message] %> 
+    <p class="user_message"><%= flash[:user_message] %></p>
+  <% # end %> 

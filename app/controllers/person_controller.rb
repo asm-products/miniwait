@@ -32,9 +32,13 @@ class PersonController < ApplicationController
 
          if person.blank?
 	        flash.now[:user_message] = "Sorry, we cannot find that user name or email address."
-         else		 
+         else
+
+             # Mark person record with unique token to be used in email link
+             person.password_reset_token = generate_token()
+             person.save			 
 		 
-			 # Send welcome email
+			 # Send rest email
 			 mailer = UserMailer.new
 			 mailer.send_password_reset_email(person)
 			 mailer = nil
@@ -47,12 +51,63 @@ class PersonController < ApplicationController
       # Fall through to display the form
    end
    
-   def change_password
-   end
-   
-   def reset_password
-      # This is where the email link comes, containing the unique reset hash to lookup
-   end
+ def reset_password
+    # Step two in reset password - triggered by email link
+	
+	# Get reset token incoming url
+	token = params[:prt]
+	
+	# Find user account by token
+    person = Person.where(["password_reset_token = ?", token]).first
+		 
+	if person.nil?
+	  raise 'Invalid password reset request, possibly from an old link.'
+	else
+	  session[:user_id] = person.id
+	end
+	
+	# Offer password change page
+    redirect_to :action => "change_password" and return
+	
+  end
+  
+  def change_password
+    # Change my password
+	
+	if session[:user_id].nil?
+	  raise 'Change password function is only available when logged in.'
+	end
+
+	# fall through to view page to get the password inputs
+  end
+  
+  def update_password
+    # Save the new password just entered twice
+	
+	pw1 = params[:password]
+	pw2 = params[:password2]
+	
+	if pw1 != pw2
+	  raise 'Password values do not match.'
+	end
+	
+	@person = Person.find(session[:user_id])
+	
+	@person.password = pw1
+	@person.save
+		  
+	flash[:user_message] = "Your password has been updated."
+	
+	redirect_to :action => 'dashboard' and return
+	
+  end
+    
+  def generate_token
+    # Generate random token
+	token = [Array.new(10){rand(256).chr}.join].pack("m").chomp
+	token = Digest::SHA256.hexdigest(token)
+	return token 
+  end  
   
   def edit_profile
      # Load person from session user id
@@ -112,6 +167,13 @@ class PersonController < ApplicationController
 	# street2 (optional)
     @person.street2 = params[:street2]
 
+	# city
+	if params[:city].blank?
+	   warning_messages << "City cannot be blank"
+	else
+	   @person.city = params[:city]
+	end
+	
 	# stateProvince
 	if params[:stateProvince].blank?
 	   warning_messages << "State cannot be blank"
@@ -168,6 +230,7 @@ class PersonController < ApplicationController
 	 else
 	    @person = Person.find(session[:user_id])
 	 end
+	 # Fall through to the view
   end
   
 end

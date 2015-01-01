@@ -16,11 +16,12 @@ gem 'jbuilder', '~> 2.0'
 
 gem 'uglifier'
 
-gem 'pony'
+gem 'pony' # easier email
 
 group :development do
    gem 'thin'
    gem 'letter_opener'
+   gem 'dotenv-rails' # load ENV vars from .env file
 end
 
 # Need time zone info

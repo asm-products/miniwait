@@ -31,6 +31,9 @@ GEM
     arel (5.0.1.20140414130214)
     builder (3.2.2)
     daemons (1.1.9)
+    dotenv (1.0.2)
+    dotenv-rails (1.0.2)
+      dotenv (= 1.0.2)
     erubis (2.7.0)
     eventmachine (1.0.4)
     execjs (2.2.2)
@@ -113,6 +116,7 @@ PLATFORMS
   x64-mingw32
 
 DEPENDENCIES
+  dotenv-rails
   jbuilder (~> 2.0)
   jquery-rails
   letter_opener

@@ -27,6 +27,8 @@ Rails.application.routes.draw do
   
   get 'person/reset_password'
   
+  get 'person/change_password'
+  
   post 'person/update_password'
   
   get 'person/logout'
