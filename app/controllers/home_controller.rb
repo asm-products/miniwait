@@ -63,7 +63,13 @@ class HomeController < ApplicationController
 	if warning_messages.size == 0
 
        if person.unique
-          person.save		  
+          begin
+             if !person.save
+			    logthis(person.errors.full_messages.join(";"))
+			 end
+          rescue => e
+		     logthis("FAILED person.save: #{e.message} #{e.backtrace.join("\n")}")
+          end		  
 	   else
 	      warning_messages << "User name or email has been used already"
 	   end
@@ -89,9 +95,9 @@ class HomeController < ApplicationController
 	else
 	
 		# Load errors array into user message
-		flash[:user_message] = warning_messages.join("; ")
+		flash.now[:user_message] = warning_messages.join("; ")
 		
-		# Pass person fields back to edit form to preserve the user's work
+		# Pass unsaved person object back to edit form to preserve the user's work
 		@person = person
 		
 		# Return to form and show errors

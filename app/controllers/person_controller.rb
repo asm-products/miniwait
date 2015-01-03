@@ -120,16 +120,7 @@ class PersonController < ApplicationController
 	end
 	
   end
-  
-  def validate_password(password)
-     # Returns "" or an error message about the password rules
-     # regex (=~) returns the position of the matching string, so zero is good
-     if (password =~ /([a-zA-Z0-9_.@#&+=]{5,99})/) == 0
-	    return ""
-	 else
-	    return "Password must be 5+ letters, numbers or special characters (_.@#&+=)"
-	 end
-  end
+ 
     
   def generate_token
     # Generate random token
@@ -140,7 +131,12 @@ class PersonController < ApplicationController
   
   def edit_profile
      # Load person from session user id
-	 @person = Person.find(session[:user_id]) 
+	 if session[:user_id].blank?
+	   flash[:user_message] = "User id not found - unexpected."
+	    @person = Person.new
+	 else
+	    @person = Person.find(session[:user_id])
+     end		
   end
   
   def save_profile

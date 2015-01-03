@@ -3,8 +3,8 @@ class UserMailer < ApplicationController
   def send_welcome_email(account)
     
 	# Create email body
-	email_body = 'Welcome to ' + Rails.application.config.app_name + '!' +
-	  '<br/><br/>Site url: <a href="http://' + Rails.application.config.domain_name + '">' + Rails.application.config.app_name + '</a>' +
+	email_body = "Welcome to #{Rails.application.config.app_name}!" +
+	  '<br/><br/>Site url: <a 	  href="http://' + Rails.application.config.domain_name + '">' + Rails.application.config.app_name + '</a>' +
 	  '<br/><br/>User name: ' + account.username +
 	  '<br/>Email address: ' + account.email_address +
 	  '<br/><br/> We hope this service will save you a lot of time.' +
@@ -19,7 +19,7 @@ class UserMailer < ApplicationController
 
   	# Create email body
 	email_body = 'Hello, ' + account.first_name + '.<br /><br />Looks like you requested a password reset.' +
-	  '<br/><br/>Click <a href="http://' + Rails.application.config.domain_name + '/person/reset_password?prt=' + account.password_reset_token + '">here</a> to reset your password.'
+	  '<br/><br/>Click <a href="http://' + Rails.application.config.domain_name + "/person/reset_password?prt=#{ account.password_reset_token}" + '>here</a> to reset your password.'
 	
 	# Send the email
 	send_mail account.email_address, 'Password Reset', email_body
@@ -31,7 +31,7 @@ class UserMailer < ApplicationController
     # Send feedback from user to support
 	
 	email_body = 'From: ' + userName + '<br/><br/>Comments:<br/>' + comment
-	send_mail('support@' + Rails.application.config.domain_name, Rails.application.config.app_name +  ' Comment', email_body)
+	send_mail("support@#{Rails.application.config.domain_name}", Rails.application.config.app_name +  ' Comment', email_body)
 	
   end
   

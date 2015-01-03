@@ -22,8 +22,7 @@ Rails.application.routes.draw do
   
   post 'person/authenticate'
   
-  get  'person/forgot_password'
-  post 'person/forgot_password'
+  match  'person/forgot_password', via: [:get, :post]
   
   get 'person/reset_password'
   

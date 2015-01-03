@@ -14,14 +14,15 @@ gem 'jquery-rails'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.0'
 
-gem 'uglifier'
+gem 'uglifier' # compression
 
 gem 'pony' # easier email
 
 group :development do
-   gem 'thin'
-   gem 'letter_opener'
+   gem 'thin' # light-weight web server
+   gem 'letter_opener' # view emails locally without sending
    gem 'dotenv-rails' # load ENV vars from .env file
+   gem 'byebug' # debugging aid
 end
 
 # Need time zone info

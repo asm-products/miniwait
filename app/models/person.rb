@@ -2,6 +2,8 @@ class Person < ActiveRecord::Base
    has_many :locations, through: :favorites
    has_many :companies, through: :company_contacts
 
+   validates_presence_of :username, :first_name, :last_name, :email_address
+   
    require 'digest/sha2'	
 	
    def unique
