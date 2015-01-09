@@ -1,38 +1,60 @@
-<div class="signup-form">
 
 <h2>Sign Up</h2>
-<%= form_tag({:controller => "home", :action => "signup"}, :method => "post") do %>
-
+<div>
   <% # if flash[:user_message] %> 
     <p class="user_message"><%= flash[:user_message] %></p>
   <% # end %> 
-  
-  <%= label_tag(:userName, "User name:", :class => 'form_label') %>
-  <%= text_field_tag(:userName, @person.username, :class => 'form_field') %>
-  <p>
-
-  <%= label_tag(:password, "Password:", :class => 'form_label') %>
-  <%= password_field_tag(:password, nil, :class => 'form_field') %>
-  <p>
-
-  <%= label_tag(:confirmPassword, "Confirm Password:", :class => 'form_label') %>
-  <%= password_field_tag(:confirmPassword, nil, :class => 'form_field') %>
-  <p>
-
-  <%= label_tag(:firstName, "First name:", :class => 'form_label') %>
-  <%= text_field_tag(:firstName, @person.first_name, :class => 'form_field') %>
-  <p>
-
-  <%= label_tag(:lastName, "Last name:", :class => 'form_label') %>
-  <%= text_field_tag(:lastName, @person.last_name, :class => 'form_field') %>
-  <p>
-
-  <%= label_tag(:emailAddress, "Email:", :class => 'form_label') %>
-  <%= text_field_tag(:emailAddress, @person.email_address, :class => 'form_field') %>
-  <p>
-
-  <%= submit_tag("Continue") %>
-  
-<% end %>
 </div>
+
+<form class="form-horizontal" role="form" action="/home/signup" method="post">
+  
+  <div class="form-group">
+     <%= label_tag(:userName, "User name:", :class => 'control-label col-sm-2') %>
+     <div class="col-sm-10">
+        <%= text_field_tag(:userName, @person.username, :class => 'form-control') %>
+     </div>
+  </div>
+
+  <div class="form-group">
+     <%= label_tag(:password, "Password:", :class => 'control-label col-sm-2') %>
+     <div class="col-sm-10">
+     <%= password_field_tag(:password, nil, :class => 'form-control') %>
+     </div>
+  </div>
+
+  <div class="form-group">
+     <%= label_tag(:confirmPassword, "Confirm Password:", :class => "control-label col-sm-2") %>
+     <div class="col-sm-10">
+     <%= password_field_tag(:confirmPassword, nil, :class => 'form-control') %>
+     </div>
+  </div>
+
+  <div class="form-group">
+     <%= label_tag(:firstName, "First name:", :class => 'control-label col-sm-2') %>
+     <div class="col-sm-10">
+     <%= text_field_tag(:firstName, @person.first_name, :class => 'form-control') %>
+     </div>
+  </div>
+
+  <div class="form-group">
+     <%= label_tag(:lastName, "Last name:", :class => 'control-label col-sm-2') %>
+     <div class="col-sm-10">
+     <%= text_field_tag(:lastName, @person.last_name, :class => 'form-control') %>
+     </div>
+  </div>
+
+  <div class="form-group">
+     <%= label_tag(:emailAddress, "Email:", :class => 'control-label col-sm-2') %>
+     <div class="col-sm-10">
+     <%= text_field_tag(:emailAddress, @person.email_address, :class => 'form-control') %>
+     </div>
+  </div>
+
+  <div class="form-group">
+     <div class="col-sm-offset-2 col-sm-10">
+         <button type="submit" class="btn btn-default">Continue</button>
+     </div>
+  </div>
+</form>
+
 

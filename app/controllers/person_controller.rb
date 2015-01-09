@@ -258,4 +258,10 @@ class PersonController < ApplicationController
 	 # Fall through to the view
   end
   
+  def index
+     # List people - used during early testing
+	sql = 'SELECT * FROM people ORDER BY last_name, first_name;'
+	@people = Person.find_by_sql(sql)	 
+  end
+  
 end

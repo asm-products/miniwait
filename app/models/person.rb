@@ -26,5 +26,9 @@ class Person < ActiveRecord::Base
 	  self.password_salt = salt
 	  self.password_hash = Digest::SHA256.hexdigest(user_password + salt)
    end  
+   
+   def full_name
+      return self.first_name + ' ' + self.last_name
+   end
   
 end

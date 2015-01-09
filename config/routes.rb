@@ -31,5 +31,7 @@ Rails.application.routes.draw do
   post 'person/update_password'
   
   get 'person/logout'
+  
+  get 'person/index'
 
 end

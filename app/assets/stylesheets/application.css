@@ -1,14 +1,10 @@
 @import url("bootstrap.css");
 
 .user_message {
-    display: inline;
 	color: red;
 	margin: 10px;
 }
 
-.form_field {
-	margin: 2px;
-}
 
 .temp_menu {
     float: right;

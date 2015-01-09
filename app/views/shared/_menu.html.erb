@@ -1,0 +1,18 @@
+          <div class="temp_menu"> <!-- replace when styling -->
+            <ul>
+               <li><a href="/home/index">Home</a></li>		   
+			 
+             <% if session[:user_id].nil? %>
+                <li><a href="/person/login">Log In</a></li>
+             <% else %>
+                <li><a href="/person/dashboard">Dashboard</a></li>
+                <li><a href="/person/edit_profile">My Profile</a></li>
+                <li><a href="/person/logout">Log Out</a></li>
+                --- Testing Only ---
+   	    	    <li><a href="/category/index">Categories</a></li>
+                <li><a href="/person/index">People</a></li>
+             <% end %>
+
+            </ul>
+             
+	      </div>

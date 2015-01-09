@@ -1,0 +1,17 @@
+<h2>People</h2>
+<div>Useful during early testing so everyone knows the people records.</div>
+
+<div class="people_list">
+	<ol>
+<%
+@people.each do |p|
+%>
+	  <li>
+		<%= p.full_name + ' (' + p.username + ')' %>
+	  </li>
+
+<%
+end
+%>	
+	</ol>
+</div>
