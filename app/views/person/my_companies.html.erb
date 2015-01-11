@@ -1,0 +1,11 @@
+<h2>My Companies</h2>
+<div class="company_list">
+  <ol>
+    <% @companies.each do |co| %>
+        <li>
+          <%= co.name + ', ' + co.category.description %>
+        </li>
+
+    <% end %>
+  </ol>
+</div>

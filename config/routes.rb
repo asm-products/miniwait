@@ -1,5 +1,19 @@
 Rails.application.routes.draw do
 
+  get 'company/add'
+
+  post 'company/update'
+
+  post 'company/create'
+
+  get 'company/edit_profile'
+
+  get 'company/locations'
+
+  get 'company/services'
+
+  get 'company/location'
+
   root 'home#index'
   
   get 'home/index' => 'home#index'
@@ -33,5 +47,7 @@ Rails.application.routes.draw do
   get 'person/logout'
   
   get 'person/index'
+
+  get 'person/my_companies'
 
 end

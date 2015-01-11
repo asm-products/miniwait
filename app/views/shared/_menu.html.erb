@@ -1,18 +1,33 @@
-          <div class="temp_menu"> <!-- replace when styling -->
-            <ul>
-               <li><a href="/home/index">Home</a></li>		   
-			 
-             <% if session[:user_id].nil? %>
-                <li><a href="/person/login">Log In</a></li>
-             <% else %>
-                <li><a href="/person/dashboard">Dashboard</a></li>
-                <li><a href="/person/edit_profile">My Profile</a></li>
-                <li><a href="/person/logout">Log Out</a></li>
-                --- Testing Only ---
-   	    	    <li><a href="/category/index">Categories</a></li>
-                <li><a href="/person/index">People</a></li>
-             <% end %>
+<div class="temp_menu"> <!-- replace when styling -->
+  <ul>
+    <li><a href="/home/index">Home</a></li>
 
-            </ul>
-             
-	      </div>
+    <%
+       if session[:user_id].nil?
+          @person = Person.new
+       else
+          begin
+             @person = Person.find(session[:user_id])
+          rescue Exception => e
+             # should never happen
+             show_error(e)
+          end
+       end
+    %>
+
+    <% if @person.nil? %>
+        <li><a href='/person/login'>Log In</a></li>
+    <% else %>
+        <li><a href="/person/dashboard">Dashboard</a></li>
+        <li><a href="/person/edit_profile">My Profile</a></li>
+        <% if !@person.companies.empty? %>
+            <li><a href="/person/my_companies">My Companies</a></li>
+        <% end %>
+        <li><a href="/person/logout">Log Out</a></li>
+        --- Testing Only ---
+        <li><a href="/category/index">Categories</a></li>
+        <li><a href="/person/index">People</a></li>
+    <% end %>
+
+  </ul>
+</div>

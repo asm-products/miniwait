@@ -22,7 +22,7 @@ group :development do
    gem 'thin' # light-weight web server
    gem 'letter_opener' # view emails locally without sending
    gem 'dotenv-rails' # load ENV vars from .env file
-   gem 'byebug' # debugging aid
+   gem 'pry-byebug' # debugging aid
 end
 
 # Need time zone info

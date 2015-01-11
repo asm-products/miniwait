@@ -16,4 +16,27 @@ class ApplicationController < ActionController::Base
 	 end
   end
   
+  def check_authenticated(functionName)
+     if session[:user_id].nil?
+	    begin
+	       raise "Cannot use #{functionName} without being logged in."
+		rescue Exception => e
+		   show_error(e)
+		end
+	 end
+  end
+  
+   def show_error(exception)
+
+     logthis(exception.message)
+	 @errorMessage = exception.message
+	 @stackTrace = exception.backtrace
+	
+	 # html page "show_error" displays error and offers login
+	 render "show_error" and return
+	
+	 return
+	
+  end
+  
 end
