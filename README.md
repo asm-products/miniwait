@@ -1,35 +1,35 @@
-# ruby-getting-started
+# Wait-Killer
 
-A barebones Rails app, which can easily be deployed to Heroku.
+You're sick but you don't want to sit in the health clinic with other sick people for two hours. What if you knew when the wait time was small?
 
-This application support the [Getting Started with Ruby on Heroku](https://devcenter.heroku.com/articles/getting-started-with-ruby) article - check it out.
+I hate waiting. I bet you do too. There's only two things standing between us and a virtually wait-free world: Some decent software and the process of getting suppliers we like to use it.
 
-## Running Locally
+Why customers want this is obvious -- Who wants to grow cobwebs in a waiting room somewhere?
 
-Make sure you have Ruby installed.  Also, install the [Heroku Toolbelt](https://toolbelt.heroku.com/).
+Company managers have several reasons for using it:
 
-```sh
-$ git clone git@github.com:heroku/ruby-getting-started.git
-$ cd ruby-getting-started
-$ bundle install
-$ rake db:create db:migrate
-$ foreman start web
-```
+* They want to smooth out the flow of customers
+* They want to make their customers happy
+* They want to know who else might be waiting to come in
+* They want to know how their wait times vary across multiple locations
 
-Your app should now be running on [localhost:5000](http://localhost:5000/).
+There are lots of companies who don't take appointments -- you just have to sit and wait. This is an application that will spread because of its usefulness, its cool factor and because competitors will use it to gain market share.
 
-## Deploying to Heroku
+Wait times cost businesses big money: http://www.inc.com/graham-winfrey/the-cost-of-customer-service-wait-times.html
+Goals
 
-```sh
-$ heroku create
-$ git push heroku master
-$ heroku run rake db:migrate
-$ heroku open
-```
+    Less wait time for everyone with an internet connection.
+    More and happier customers for service companies.
 
-## Documentation
+# Key Features
 
-For more information about using Ruby on Heroku, see these Dev Center articles:
+    Clean, touch-friendly interface
+    Quickly find companies (name, category, distance from you)
+    See time of last update to service wait time
+    Get notified when wait times change (watch/unwatch)
+    Always free.
 
-- [Ruby on Heroku](https://devcenter.heroku.com/categories/ruby)
+# Target Audience
 
+    Consumers buying a service that queues people (e.g. tire store)
+    Suppliers who charge for service, want to spread out their demand and care about customers
