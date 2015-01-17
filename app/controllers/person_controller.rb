@@ -5,7 +5,7 @@ class PersonController < ApplicationController
 	end
 
 	def logout
-		session[:user_id] = nil
+		session.delete(:user_id)
 		flash[:user_message] = "You have been logged out."
 		redirect_to :controller => "person", :action => "login"
 	end
@@ -129,7 +129,7 @@ class PersonController < ApplicationController
 		return token
 	end
 
-	def edit_profile
+	def edit
 		# Load person from session user id
 		if session[:user_id].blank?
 			flash[:user_message] = "User id not found - unexpected."
@@ -139,7 +139,7 @@ class PersonController < ApplicationController
 		end
 	end
 
-	def save_profile
+	def update
 		# Save an edited profile, checking rules
 
 		@person = Person.find(session[:user_id])
@@ -235,14 +235,14 @@ class PersonController < ApplicationController
 			# Clear user errors
 			flash[:user_message] = 'Profile updated'
 
-			redirect_to :action => "dashboard"
+			redirect_to :controller => 'person', :action => 'dashboard'
 
 		else
 
 			# Load errors array into user message
 			flash.now[:user_message] = warning_messages.join("; ")
 
-			render "edit_profile"
+			render "edit"
 
 		end
 
@@ -262,10 +262,6 @@ class PersonController < ApplicationController
 		# List people
 		sql = 'SELECT * FROM people ORDER BY last_name, first_name;'
 		@people = Person.find_by_sql(sql)
-	end
-
-	def my_companies
-		@companies = Person.find(session[:user_id]).companies
 	end
 
 end

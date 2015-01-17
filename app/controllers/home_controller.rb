@@ -1,6 +1,6 @@
 class HomeController < ApplicationController
 
-	def index
+	def show
 		@person = Person.new
 	end
 
@@ -90,7 +90,7 @@ class HomeController < ApplicationController
 			session[:user_id] = person.id
 
 			# Edit this user profile
-			redirect_to :controller => 'person', :action => 'edit_profile'
+			redirect_to :controller => 'person', :action => 'edit'
 
 		else
 
@@ -101,7 +101,7 @@ class HomeController < ApplicationController
 			@person = person
 
 			# Return to form and show errors
-			render 'index'
+			render 'show'
 
 		end
 

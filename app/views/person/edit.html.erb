@@ -4,7 +4,7 @@
 <div class="entry-form">
 
 <p>
-<%= form_tag({:controller => "person", :action => "save_profile"}, :method => "post") do %>
+<%= form_tag(:controller => "person", :action => "update", :method => "post") do %>
 
   <% # if flash[:user_message] %> 
     <p class="user_message"><%= flash[:user_message] %></p>

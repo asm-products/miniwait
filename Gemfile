@@ -23,6 +23,7 @@ group :development do
    gem 'letter_opener' # view emails locally without sending
    gem 'dotenv-rails' # load ENV vars from .env file
    gem 'pry-byebug' # debugging aid
+   gem 'debase'
 end
 
 # Need time zone info

@@ -1,15 +1,15 @@
 <h2>Categories</h2>
 <div class="category_list">
-	<ol>
-<%
-@categories.each do |cat|
-%>
-	  <li>
-		<%= cat.description %>
-	  </li>
+  <ol>
+    <%
+       @categories.each do |cat|
+    %>
+        <li>
+          <%= cat.description %>
+        </li>
 
-<%
-end
-%>	
-	</ol>
+    <%
+       end
+    %>
+  </ol>
 </div>

@@ -3,7 +3,7 @@
   <ol>
     <% @companies.each do |co| %>
         <li>
-          <%= co.name + ', ' + co.category.description %>
+          <%= link_to co.name, :controller => 'company', :action => 'edit', :company_id => co.id %>
         </li>
 
     <% end %>

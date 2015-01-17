@@ -1,5 +1,10 @@
 class CompanyController < ApplicationController
-  def add
+
+  def index
+    @companies = Person.find(session[:user_id]).companies
+  end
+
+  def new
     check_authenticated(__method__) # error if user not logged in
     # fall through to view
     @company = Company.new
@@ -60,7 +65,7 @@ class CompanyController < ApplicationController
       session[:company_id] = company.id
 
       # Edit this company profile
-      redirect_to :controller => 'company', :action => 'edit_profile'
+      redirect_to :controller => 'company', :action => 'edit', :company_id => company.id
 
     else
 
@@ -71,17 +76,17 @@ class CompanyController < ApplicationController
       @company = company
 
       # Return to form and show errors
-      render 'add'
+      render 'new'
 
     end
 
   end
 
-  def edit_profile
-    if session[:company_id].nil?
-      raise 'Company edit_profile called without id'
+  def edit
+    if params[:company_id].nil?
+      raise 'Company edit called without id'
     else
-      @company = Company.find(session[:company_id])
+      @company = Company.find(params[:company_id])
     end
   end
 
@@ -129,7 +134,7 @@ class CompanyController < ApplicationController
       session[:company_id] = company.id
 
       # Edit this company profile
-      redirect_to :controller => 'company', :action => 'edit_profile'
+      redirect_to :controller => 'company', :action => 'edit'
 
     else
 
@@ -140,16 +145,27 @@ class CompanyController < ApplicationController
       @company = company
 
       # Return to form and show errors
-      render 'edit_profile'
+      render 'edit'
 
     end
 
   end
 
   def locations
+    @company = Company.find(params[:company_id])
   end
 
   def services
+    @company = Company.find(params[:company_id])
+  end
+
+  def add_service
+    # Add new service to existing company
+    redirect_to :action => 'services'
+  end
+
+  def contacts
+    @company = Company.find(params[:company_id])
   end
 
   def location

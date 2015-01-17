@@ -1,0 +1,17 @@
+<h2><%= @company.name %></h2>
+<h3>Locations</h3>
+
+<div class="locations_list">
+  <ol>
+    <%
+       @company.locations.each do |loc|
+    %>
+        <li>
+          <%= loc.loc_name %>
+        </li>
+
+    <%
+       end
+    %>
+  </ol>
+</div>

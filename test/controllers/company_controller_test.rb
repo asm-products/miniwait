@@ -2,12 +2,12 @@ require 'test_helper'
 
 class CompanyControllerTest < ActionController::TestCase
   test "should get add" do
-    get :add
+    get :new
     assert_response :success
   end
 
-  test "should get edit_profile" do
-    get :edit_profile
+  test "should get edit" do
+    get :edit
     assert_response :success
   end
 

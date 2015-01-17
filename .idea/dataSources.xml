@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" hash="645469619">
+    <data-source source="LOCAL" name="Rails waitkiller: development" uuid="edcf2523-0387-484f-a820-412d382d1075">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://localhost:5432/wait-killer</jdbc-url>
+      <libraries />
+    </data-source>
+    <data-source source="LOCAL" name="Rails waitkiller: test" uuid="bc930274-a798-49da-9e15-3c3a9b7c1a69">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql:wait-killer-test</jdbc-url>
+      <libraries />
+    </data-source>
+    <data-source source="LOCAL" name="Rails waitkiller: production" uuid="ca4217b4-e32a-4f21-b28a-8295e1726726">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql:wait-killer_production</jdbc-url>
+      <libraries />
+    </data-source>
+  </component>
+</project>
