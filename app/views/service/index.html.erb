@@ -7,7 +7,7 @@
        @company.services.each do |svc|
     %>
         <li>
-          <%= svc.description %>
+          <%= svc.description %> <a href="/service/destroy?id=<%= svc.id %>">X</a>
         </li>
 
     <%
@@ -21,6 +21,7 @@
     <%= label_tag(:description, 'Service:', :class => 'control-label col-sm-2') %>
     <div class="col-sm-10">
       <%= text_field_tag(:description, nil, :class => 'form-control') %>
+      <%= hidden_field_tag 'company_id', @company.id %>
       <button type="submit" class="btn btn-default">Add</button>
     </div>
   </div>

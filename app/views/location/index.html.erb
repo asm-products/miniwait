@@ -7,11 +7,13 @@
        @company.locations.each do |loc|
     %>
         <li>
-          <%= loc.loc_name %>
+          <a href="/location/edit?id=<%= loc.id %>"><%= loc.loc_name %></a>
         </li>
 
     <%
        end
     %>
   </ol>
+  <p>
+  <a href='/location/new?company_id=<%= @company.id %>'>Add Location</a>
 </div>

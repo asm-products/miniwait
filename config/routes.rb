@@ -41,7 +41,7 @@ Rails.application.routes.draw do
   # Service
   get 'service/index'
   post 'service/create'
-  post 'service/destroy'
+  get 'service/destroy'
 
   # Category
   get 'category/index'

@@ -151,19 +151,6 @@ class CompanyController < ApplicationController
 
   end
 
-  def locations
-    @company = Company.find(params[:company_id])
-  end
-
-  def services
-    @company = Company.find(params[:company_id])
-  end
-
-  def add_service
-    # Add new service to existing company
-    redirect_to :action => 'services'
-  end
-
   def contacts
     @company = Company.find(params[:company_id])
   end
