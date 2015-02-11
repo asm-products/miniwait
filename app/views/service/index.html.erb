@@ -7,7 +7,7 @@
        @company.services.each do |svc|
     %>
         <li>
-          <%= svc.description %> <a href="/service/destroy?id=<%= svc.id %>">X</a>
+          <%= svc.description %> <a href="/service/destroy?id=<%= svc.id %>">X</a> <%= ' primary' if svc.is_primary %>
         </li>
 
     <%

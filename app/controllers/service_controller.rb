@@ -20,10 +20,17 @@ class ServiceController < ApplicationController
   end
 
   def destroy
+	  # Delete one service from this company
     if !params[:id].blank?
        @service = Service.find(params[:id])
        @company = Company.find(@service.company.id)
        @service.destroy
+    end
+    # Clean out linked services from all locations
+    sql = 'SELECT id FROM service_locations WHERE service_id = ' + @service.id.to_s
+    slocs = ServiceLocation.find_by_sql(sql)
+    slocs.each do |sloc|
+	    sloc.destroy()
     end
     render 'index'
   end

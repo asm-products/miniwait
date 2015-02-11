@@ -1,4 +1,5 @@
-<h1>Edit Location</h1>
+<h2><%= @company.name %></h2>
+<h3>Edit Location</h3>
 <div class="entry-form">
   <p>
     <%= form_tag(:controller => "location", :action => "update", :method => "post") do %>
@@ -39,4 +40,24 @@
         <%= submit_tag("Save") %>
 
   <% end %>
+</div>
+<div class='services_section'>
+  <h3>Offered Here</h3>
+  <div class='location_services_list'>
+    <ul>
+    <!-- Show services at this location: @location_services -->
+    <% @location_services.each do |loc_svc| %>
+        <li><%= loc_svc.service.description %><a href='/location/remove_service?loc=<%= @location.id %>&svc=<%= loc_svc.service.id %>'> X</a></li>
+    <% end %>
+    </ul>
+  </div>
+  <h3>Company Services</h3>
+  <div class='company_services_list'>
+    <!-- Show selector for company services: @company_services -->
+    <ul>
+    <% @company_services.each do |svc| %>
+        <li><a href='/location/add_service?loc=<%= @location.id %>&svc=<%= svc.id %>'><- </a><%= svc.description %></li>
+    <% end %>
+    </ul>
+  </div>
 </div>

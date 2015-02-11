@@ -99,6 +99,9 @@ class LocationController < ApplicationController
 
   def edit
     @location = Location.find(params[:id])
+    @company = Company.find(@location.company_id)
+	 @location_services = @location.service_locations
+	 @company_services = @company.services
   end
 
   def update
@@ -184,6 +187,31 @@ class LocationController < ApplicationController
 
     end
 
+  end
+
+  def add_service
+	  # Add one service to one location
+	  service_id = params[:svc]
+	  location_id = params[:loc]
+	  sql = 'SELECT id FROM service_locations WHERE service_id = ' + service_id + ' AND location_id = ' + location_id
+	  sloc = ServiceLocation.find_by_sql(sql).first
+	  if sloc.blank?
+		  @location = Location.find(location_id)
+		  @location.service_locations.create(:location_id => location_id, :service_id => service_id, :wait_time => 0)
+	  end
+	  redirect_to :controller => 'location', :action => 'edit', :id => location_id
+  end
+
+  def remove_service
+	  # Remove one service from one location
+	  service_id = params[:svc]
+	  location_id = params[:loc]
+	  sql = 'SELECT id FROM service_locations WHERE service_id = ' + service_id + ' AND location_id = ' + location_id
+	  sloc = ServiceLocation.find_by_sql(sql).first
+	  if !sloc.blank?
+		 sloc.destroy()
+     end
+	  redirect_to :controller => 'location', :action => 'edit', :id => location_id
   end
 
   def destroy

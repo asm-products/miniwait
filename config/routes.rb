@@ -35,6 +35,8 @@ Rails.application.routes.draw do
   post 'location/create'
   get 'location/show'
   get 'location/edit'
+  get 'location/add_service'
+  get 'location/remove_service'
   post 'location/update'
   post 'location/destroy'
 
