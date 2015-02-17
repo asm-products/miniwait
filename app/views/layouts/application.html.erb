@@ -2,17 +2,23 @@
 <html>
 <head>
 	<title><%= Rails.application.config.app_name %></title>
-	<%= stylesheet_link_tag "application", media: "all" %>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <%= stylesheet_link_tag "application", media: "all" %>
+    <%= javascript_include_tag "application" %>
+	<meta name='viewport' content='width=device-width, initial-scale=1'>
 </head>
 <body>
-       <div class="container-fluid">
+<div id="wrap">
+  <div id="main">
+    <div class="container-fluid">
 
-          <%= render "shared/menu" %>
-	  
-         <%= yield %>
+      <%= render 'shared/menu' %>
 
-  	  </div>
+      <%= yield %>
 
+    </div>
+
+    </div>
+</div>
+<%= render 'shared/footer' %>
 </body>
 </html>

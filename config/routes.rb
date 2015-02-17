@@ -37,6 +37,7 @@ Rails.application.routes.draw do
   get 'location/edit'
   get 'location/add_service'
   get 'location/remove_service'
+  get 'location/update_wait_time'
   post 'location/update'
   post 'location/destroy'
 

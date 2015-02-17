@@ -95,9 +95,14 @@ class LocationController < ApplicationController
   end
 
   def show
+	  # Display one company location with service wait times
+	  @location = Location.find(params[:id])
+	  @company = Company.find(@location.company_id)
+	  @location_services = @location.service_locations.order(service_id: :asc)
   end
 
   def edit
+	 # Edit one company location
     @location = Location.find(params[:id])
     @company = Company.find(@location.company_id)
 	 @location_services = @location.service_locations
@@ -212,6 +217,20 @@ class LocationController < ApplicationController
 		 sloc.destroy()
      end
 	  redirect_to :controller => 'location', :action => 'edit', :id => location_id
+  end
+
+  def update_wait_time
+	  sloc_id = params[:id]
+	  change_val = params[:change_val]
+	  if (!change_val.blank? && !sloc_id.blank?)
+		  sloc = ServiceLocation.find(params[:id])
+		  new_time = sloc.wait_time + change_val.to_i
+		  if new_time >= 0
+		      sloc.wait_time = new_time
+		      sloc.save
+		  end
+		  redirect_to :controller => 'location', :action => 'show', :id => sloc.location_id
+	  end
   end
 
   def destroy

@@ -1,11 +1,8 @@
 <div class="entry-form">
 
 <h2>Log In</h2>
+  <%= render 'shared/user_message' %>
 <%= form_tag({:controller => "person", :action => "authenticate"}, :method => "post") do %>
-
-  <% # if flash[:user_message] %> 
-    <p class="user_message"><%= flash[:user_message] %></p>
-  <% # end %> 
   
   <%= label_tag(:username, "User name:", :class => 'form_label') %>
   <%= text_field_tag(:username, nil, :class => 'form_field') %>

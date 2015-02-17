@@ -1,43 +1,40 @@
 <h1>New Location</h1>
-
+<%= render 'shared/user_message' %>
 <div class="entry-form">
 <p>
 <%= form_tag(:controller => "location", :action => "create", :method => "post") do %>
 
-<% # if flash[:user_message] %>
-<p class="user_message"><%= flash[:user_message] %></p>
-<% # end %>
-
-<%= label_tag(:locName, "Loc Name:", :class => 'form_label') %>
+<%= label_tag(:locName, "Loc Name:", :class => 'form_label col-sm-2') %>
 <%= text_field_tag(:locName, @location.loc_name, :class => 'form_field') %>
 <p>
 
-  <%= label_tag(:street1, "Street 1:", :class => 'form_label') %>
+  <%= label_tag(:street1, "Street 1:", :class => 'form_label col-sm-2') %>
   <%= text_field_tag(:street1, @location.street1, :class => 'form_field') %>
 <p>
 
-  <%= label_tag(:street2, "Street 2:", :class => 'form_label') %>
+  <%= label_tag(:street2, "Street 2:", :class => 'form_label col-sm-2') %>
   <%= text_field_tag(:street2, @location.street2, :class => 'form_field') %>
 <p>
 
-  <%= label_tag(:street1, "City, State:", :class => 'form_label') %><%= text_field_tag(:city, @location.city, :class => 'form_field') %><%= text_field_tag(:stateProvince, @location.state_province, :class => 'form_field') %>
+  <%= label_tag(:street1, "City, State:", :class => 'form_label col-sm-2') %><%= text_field_tag(:city, @location.city, :class => 'form_field') %><%= text_field_tag(:stateProvince, @location.state_province, :class => 'form_field') %>
 <p>
 
-  <%= label_tag(:postalCode, "Zip/Postal:", :class => 'form_label') %>
+  <%= label_tag(:postalCode, "Zip/Postal:", :class => 'form_label col-sm-2') %>
   <%= text_field_tag(:postalCode, @location.postal_code, :class => 'form_field') %>
 <p>
 
-  <%= label_tag(:country, "Country:", :class => 'form_label') %>
+  <%= label_tag(:country, "Country:", :class => 'form_label col-sm-2') %>
   <%= text_field_tag(:country, @location.country, :class => 'form_field') %>
 <p>
 
-  <%= label_tag(:phoneNumber, "Phone number:", :class => 'form_label') %>
+  <%= label_tag(:phoneNumber, "Phone number:", :class => 'form_label col-sm-2') %>
   <%= text_field_tag(:phoneNumber, @location.phone_number, :class => 'form_field') %>
 <p>
 
   <%= hidden_field_tag 'company_id', @location.company_id %>
 
-  <%= submit_tag("Save") %>
+  <%= label_tag(:btn, '', :class => 'form_label col-sm-2') %>
+  <%= submit_tag("Save", :class => 'btn btn-primary') %>
 
 <% end %>
 </div>

@@ -1,2 +1,21 @@
-<h1>Loation#show</h1>
-<p>Find me in app/views/loation/show.html.erb</p>
+<h2><%= @company.name %></h2>
+<h3>Location: <%= @location.loc_name %></h3>
+<%= render 'shared/user_message' %>
+<div>
+  <table class='table-striped table-bordered'>
+    <th>Service</th>
+    <th>Wait Time (minutes)</th>
+    <th>Change</th>
+    <% @location_services.each do |sloc| %>
+        <tr>
+            <td><%= sloc.service.description %></td>
+            <td><%= sloc.wait_time %></td>
+            <td><a href='/location/update_wait_time?id=<%= sloc.id %>&change_val=5'><button type="button" class="btn btn-default btn-sm">
+              <span class="glyphicon glyphicon-arrow-up"></span> Up
+            </button></a> <a href='/location/update_wait_time?id=<%= sloc.id %>&change_val=-5'><button type="button" class="btn btn-default btn-sm">
+              <span class="glyphicon glyphicon-arrow-down"></span> Down</button></a></td>
+        </tr>
+    <% end %>
+
+  </table>
+</div>

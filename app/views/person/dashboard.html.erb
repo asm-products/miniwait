@@ -2,8 +2,4 @@
 <h2>Dashboard</h2>
 <p>
 <p>Welcome, <%= @person.first_name %>.</p>
-  <%  if flash[:user_message] %>
-    <div class="user_message">
-      <%= flash[:user_message] %>
-    </div>
-  <%  end %>
+<%= render 'shared/user_message' %>

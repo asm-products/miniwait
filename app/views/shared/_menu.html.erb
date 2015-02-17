@@ -1,34 +1,37 @@
-<div class="temp_menu"> <!-- replace when styling -->
-  <ul>
-    <li><a href="/home/show">Home</a></li>
+<%
+   if session[:user_id].blank?
+      @person = Person.new
+   else
+      begin
+         @person = Person.find(session[:user_id])
+      rescue Exception => e
+         # should never happen
+         show_error(e)
+      end
+   end
+%>
 
-    <%
-       if session[:user_id].blank?
-          @person = Person.new
-       else
-          begin
-             @person = Person.find(session[:user_id])
-          rescue Exception => e
-             # should never happen
-             show_error(e)
-          end
-       end
-    %>
-
-    <% if @person.username.nil? %>
-        <li><a href='/person/login'>Log In</a></li>
-    <% else %>
-        <li><a href="/person/dashboard">Dashboard</a></li>
-        <li><a href="/person/edit">My Profile</a></li>
-        <li><a href="/company/new">Add Company</a></li>
-        <% if !@person.companies.empty? %>
-            <li><a href="/company/index">My Companies</a></li>
-        <% end %>
-        <li><a href="/person/logout">Log Out</a></li>
-        --- Testing Only ---
-        <li><a href="/category/index">Categories</a></li>
-        <li><a href="/person/index">People</a></li>
-    <% end %>
-
+  <ul class="nav nav-pills" role='tablist'>
+    <li><a href='/home/show'>Home</a></li>
+    <li><a href="#">About</a></li>
+    <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Menu <span class="caret"></span></a>
+        <ul class="dropdown-menu" role="menu">
+            <% if @person.username.nil? %>
+                <li><a href='/person/login'>Log In</a></li>
+            <% else %>
+                <li><a href="/person/dashboard">Dashboard</a></li>
+                <li><a href="/person/edit">My Profile</a></li>
+                <li><a href="/company/new">Add Company</a></li>
+                <% if !@person.companies.empty? %>
+                    <li><a href="/company/index">My Companies</a></li>
+                <% end %>
+                <li><a href="/person/logout">Log Out</a></li>
+                --- Testing Only ---
+                <li><a href="/category/index">Categories</a></li>
+                <li><a href="/person/index">People</a></li>
+            <% end %>
+        </ul> <!-- dropdown-menu -->
+    </li> <!-- dropdown -->
   </ul>
-</div>
+

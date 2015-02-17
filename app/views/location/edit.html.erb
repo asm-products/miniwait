@@ -1,63 +1,78 @@
 <h2><%= @company.name %></h2>
 <h3>Edit Location</h3>
-<div class="entry-form">
-  <p>
-    <%= form_tag(:controller => "location", :action => "update", :method => "post") do %>
+<%= render 'shared/user_message' %>
+<div>
+  <form class="form-horizontal" role="form" action="/location/update" method="post">
 
-        <% # if flash[:user_message] %>
-      <p class="user_message"><%= flash[:user_message] %></p>
-      <% # end %>
-
-      <%= label_tag(:locName, "Loc Name:", :class => 'form_label') %>
+    <div class="form-group">
+      <%= label_tag(:locName, "Loc Name:", :class => 'form_label col-sm-2') %>
       <%= text_field_tag(:locName, @location.loc_name, :class => 'form_field') %>
-      <p>
+    </div>
 
-        <%= label_tag(:street1, "Street 1:", :class => 'form_label') %>
-        <%= text_field_tag(:street1, @location.street1, :class => 'form_field') %>
-      <p>
+    <div class="form-group">
+      <%= label_tag(:street1, "Street 1:", :class => 'form_label col-sm-2') %>
+      <%= text_field_tag(:street1, @location.street1, :class => 'form_field') %>
+    </div>
 
-        <%= label_tag(:street2, "Street 2:", :class => 'form_label') %>
-        <%= text_field_tag(:street2, @location.street2, :class => 'form_field') %>
-      <p>
+    <div class="form-group">
+      <%= label_tag(:street2, "Street 2:", :class => 'form_label col-sm-2') %>
+      <%= text_field_tag(:street2, @location.street2, :class => 'form_field') %>
+    </div>
 
-        <%= label_tag(:street1, "City, State:", :class => 'form_label') %><%= text_field_tag(:city, @location.city, :class => 'form_field') %><%= text_field_tag(:stateProvince, @location.state_province, :class => 'form_field') %>
-      <p>
+    <div class="form-group">
+      <%= label_tag(:street1, "City, State:", :class => 'form_label col-sm-2') %><%= text_field_tag(:city, @location.city, :class => 'form_field col-sm-2') %><%= text_field_tag(:stateProvince, @location.state_province, :class => 'form_field col-sm-1') %>
+    </div>
 
-        <%= label_tag(:postalCode, "Zip/Postal:", :class => 'form_label') %>
-        <%= text_field_tag(:postalCode, @location.postal_code, :class => 'form_field') %>
-      <p>
+    <div class="form-group">
+      <%= label_tag(:postalCode, "Zip/Postal:", :class => 'form_label col-sm-2') %>
+      <%= text_field_tag(:postalCode, @location.postal_code, :class => 'form_field') %>
+    </div>
 
-        <%= label_tag(:country, "Country:", :class => 'form_label') %>
-        <%= text_field_tag(:country, @location.country, :class => 'form_field') %>
-      <p>
+    <div class="form-group">
+      <%= label_tag(:country, "Country:", :class => 'form_label col-sm-2') %>
+      <%= text_field_tag(:country, @location.country, :class => 'form_field') %>
+    </div>
 
-        <%= label_tag(:phoneNumber, "Phone number:", :class => 'form_label') %>
-        <%= text_field_tag(:phoneNumber, @location.phone_number, :class => 'form_field') %>
-      <p>
+    <div class="form-group">
+      <%= label_tag(:phoneNumber, "Phone number:", :class => 'form_label col-sm-2') %>
+      <%= text_field_tag(:phoneNumber, @location.phone_number, :class => 'form_field') %>
+    </div>
 
-        <%= hidden_field_tag 'id', @location.id %>
+    <div class="form-group">
+      <%= label_tag(:btn, '', :class => 'form_label col-sm-2') %>
+      <%= submit_tag("Save", :class => 'btn btn-primary') %>
+    </div>
 
-        <%= submit_tag("Save") %>
+    <%= hidden_field_tag 'id', @location.id %>
 
-  <% end %>
+  </form>
 </div>
-<div class='services_section'>
-  <h3>Offered Here</h3>
-  <div class='location_services_list'>
-    <ul>
-    <!-- Show services at this location: @location_services -->
-    <% @location_services.each do |loc_svc| %>
-        <li><%= loc_svc.service.description %><a href='/location/remove_service?loc=<%= @location.id %>&svc=<%= loc_svc.service.id %>'> X</a></li>
-    <% end %>
-    </ul>
-  </div>
-  <h3>Company Services</h3>
-  <div class='company_services_list'>
-    <!-- Show selector for company services: @company_services -->
-    <ul>
-    <% @company_services.each do |svc| %>
-        <li><a href='/location/add_service?loc=<%= @location.id %>&svc=<%= svc.id %>'><- </a><%= svc.description %></li>
-    <% end %>
-    </ul>
-  </div>
-</div>
+<div class='container-fluid'>
+  <div class='row'>
+    <div class="col-sm-4 col-md-4">
+      <h3>Offered Here</h3>
+      <ul style='list-style-type: none;'>
+        <!-- Show services at this location: @location_services -->
+        <% @location_services.each do |loc_svc| %>
+            <li><%= loc_svc.service.description %>
+              <a href='/location/remove_service?loc=<%= @location.id %>&svc=<%= loc_svc.service.id %>'>  <span class="glyphicon glyphicon-remove"></span></a>
+            </li>
+        <% end %>
+      </ul>
+    </div>
+    <div class='col-sm-4 col-md-4'>
+      <h3>All Company Services</h3>
+      <!-- Show selector for company services: @company_services -->
+      <ul style='list-style-type: none;'>
+        <% @company_services.each do |svc| %>
+            <li><a href='/location/add_service?loc=<%= @location.id %>&svc=<%= svc.id %>'><span class="glyphicon glyphicon-plus"></span> </a><%= svc.description %>
+            </li>
+        <% end %>
+      </ul>
+    </div>
+    <div class='col-sm-4 col-md-4'>
+        <h3>Wait Times</h3>
+       <a href="/location/show?id=<%= @location.id %>"><span class="glyphicon glyphicon-edit"></span> Edit</a>
+    </div>
+  </div><!-- row -->
+</div> <!-- container -->
