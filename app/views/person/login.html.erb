@@ -1,22 +1,30 @@
-<div class="entry-form">
+<div class='container-fluid'>
 
-<h2>Log In</h2>
+  <h2>Log In</h2>
   <%= render 'shared/user_message' %>
-<%= form_tag({:controller => "person", :action => "authenticate"}, :method => "post") do %>
-  
-  <%= label_tag(:username, "User name:", :class => 'form_label') %>
-  <%= text_field_tag(:username, nil, :class => 'form_field') %>
-  <p>
+  <p class='text-info'>Enter your login credentials below.</p>
 
-  <%= label_tag(:password, "Password:", :class => 'form_label') %>
-  <%= password_field_tag(:password, nil, :class => 'form_field') %>
-  <p>
+  <form class="form-horizontal" role="form" action="/person/authenticate" method="post">
 
-  <%= submit_tag("Log In") %>
-  
-  <p>
-  <%= link_to "Forgot password", :controller => "person", :action => "forgot_password" %>
-  
-<% end %>
+    <div class='form-group'>
+      <%= label_tag(:username, "User name:", :class => 'form_label col-sm-2') %>
+      <%= text_field_tag(:username, nil, :class => 'form_field col-sm-3') %>
+    </div>
+
+    <div class='form-group'>
+      <%= label_tag(:password, "Password:", :class => 'form_label col-sm-2') %>
+      <%= password_field_tag(:password, nil, :class => 'form_field col-sm-3') %>
+    </div>
+
+    <div class='form-group'>
+      <%= label_tag(:btn, ' ', :class => 'form_label col-sm-2') %>
+      <%= submit_tag("Log In", :class => 'btn btn-primary') %>
+    </div>
+
+    <div>
+      <%= link_to "Forgot password", :controller => "person", :action => "forgot_password" %>
+    </div>
+
+  </form>
+
 </div>
-
