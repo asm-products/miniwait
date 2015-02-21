@@ -238,7 +238,6 @@ class PersonController < ApplicationController
          # Send reset email
          mailer = UserMailer.new
          mailer.send_profile_changed_email(@person)
-         mailer = nil
 
          redirect_to :controller => 'person', :action => 'dashboard'
 
