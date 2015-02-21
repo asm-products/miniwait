@@ -18,6 +18,8 @@ gem 'uglifier' # compression
 
 gem 'pony' # easier email
 
+gem 'figaro', '~> 0.7.0' # set ENV variables via application.yml
+
 group :development do
    gem 'thin' # light-weight web server
    gem 'letter_opener' # view emails locally without sending
@@ -31,4 +33,5 @@ gem 'tzinfo-data'
 group :production do
    gem 'rails_12factor'
    gem 'unicorn'
+   gem 'postmark-rails'
 end

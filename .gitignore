@@ -29,5 +29,7 @@ instructions.txt
 Gemfile.lock
 
 # Ignore local dump of heroku credentials
-
 heroku_credentials.txt
+
+# Ignore application configuration
+/config/application.yml

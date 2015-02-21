@@ -38,7 +38,7 @@ class PersonController < ApplicationController
             person.password_reset_token = generate_token()
             person.save
 
-            # Send rest email
+            # Send reset email
             mailer = UserMailer.new
             mailer.send_password_reset_email(person)
             mailer = nil
@@ -234,6 +234,11 @@ class PersonController < ApplicationController
 
          # Clear user errors
          flash[:user_message] = 'Profile updated'
+
+         # Send reset email
+         mailer = UserMailer.new
+         mailer.send_profile_changed_email(@person)
+         mailer = nil
 
          redirect_to :controller => 'person', :action => 'dashboard'
 

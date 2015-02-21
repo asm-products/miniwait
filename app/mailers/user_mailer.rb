@@ -25,6 +25,16 @@ class UserMailer < ApplicationController
 	send_mail account.email_address, 'Password Reset', email_body
 	
   end
+
+  def send_profile_changed_email(account)
+
+     # Create email body
+     email_body = 'Hello, ' + account.first_name + '.<br /><br />Your profile was just updated at ' + Rails.application.config.domain_name + '.'
+
+     # Send the email
+     send_mail account.email_address, 'Profile Changed', email_body
+
+  end
   
   def send_feedback(userName, comment)
   
@@ -36,27 +46,45 @@ class UserMailer < ApplicationController
   end
   
   def send_mail(email_address, subject, email_body)
-    # Send email using Pony gem
-	# Documentation: https://github.com/benprew/pony
-	
-	html_body = wrap_html(email_body)
-  
-    require "letter_opener"
 
-	Pony.options = {
-       :via => LetterOpener::DeliveryMethod,
-       :via_options => {:location => File.expand_path('../tmp/letter_opener', __FILE__)}
-    }
-	
+	html_body = wrap_html(email_body)
+
+   # Send email using Pony gem
+   # Documentation: https://github.com/benprew/pony
+
+   if Rails.env == 'production'
+
+      Pony.options = {
+          :via => :smtp,
+          :via_options => {
+              :address        => 'smtp.postmarkapp.com',
+              :port           => '25',
+              :user_name      => Rails.application.config.postmark_token,
+              :password       => Rails.application.config.postmark_token,
+              :authentication => :plain, # :plain, :login, :cram_md5, no auth by default
+              :domain         => "waitkiller.herokuapp.com" # the HELO domain provided by the client to the server
+          }
+      }
+
+   else
+
+      # letter_opener creates local files and opens them in the browser to prevent email sending during development
+      require "letter_opener"
+
+      Pony.options = {
+          :via => LetterOpener::DeliveryMethod,
+          :via_options => {:location => File.expand_path('../tmp/letter_opener', __FILE__)}
+       }
+   end
+
     Pony.mail({
-	  :to => email_address, 
-	  :subject => subject, 
-	  :body => email_body, 
-	  :html_body => html_body,
+     :to => email_address,
+     :subject => subject,
+     :body => email_body,
+     :html_body => html_body,
       :from => 'support@' +  Rails.application.config.domain_name
      })
-	
-  
+
   end
   
   def wrap_html(msg)
