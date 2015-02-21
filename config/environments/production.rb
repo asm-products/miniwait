@@ -44,7 +44,7 @@ Rails.application.configure do
   # Set to :debug to see everything in the log.
   config.logger = Logger.new(STDOUT) # recommended by http://help.papertrailapp.com/kb/configuration/unicorn/
   config.logger.level = Logger.const_get('INFO') # recommended by http://help.papertrailapp.com/kb/configuration/unicorn/
-  config.log_level = :info
+  config.log_level = :debug
 
   # Prepend all log lines with the following tags.
   # config.log_tags = [ :subdomain, :uuid ]
