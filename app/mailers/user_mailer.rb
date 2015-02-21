@@ -84,11 +84,13 @@ class UserMailer < ApplicationController
       # http://developer.postmarkapp.com/developer-send-api.html
       # Substitute 'POSTMARK_API_TEST' for postmark_token to test and not send actual emails
 
+logthis('create uri')
       uri = URI('https://api.postmarkapp.com/email')
 
+logthis('form request')
       # Form the request
       req = Net::HTTP::Post.new(uri)
-
+logthis('set headers')
       # Set request headers
       req['Accept'] = 'application/json'
       req['Content-Type'] = 'application/json'
@@ -102,12 +104,15 @@ class UserMailer < ApplicationController
           'TextBody' => email_body
       }.to_json
 
+logthis('set body')
       req.body = rbody
 
       # Send the request, waiting for the response
+logthis('send request')
       response = Net::HTTP.new(uri.host, uri.port).start {|http| http.request(req) }
 
       # Translate response from JSON to string array
+logthis('decode response')
       parsed_response = ActiveSupport::JSON.decode(response)
 
       # Log the HTTP response
