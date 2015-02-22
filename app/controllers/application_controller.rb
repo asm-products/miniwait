@@ -49,7 +49,7 @@ class ApplicationController < ActionController::Base
       end
 
       if request.post?
-         if params[:email] && params[:comment]
+         if !params[:email].blank? && !params[:comment].blank?
             mailer = UserMailer.new()
             mailer.send_feedback(params[:email], params[:comment])
             flash[:user_message] = 'Thank you for your feedback.'
