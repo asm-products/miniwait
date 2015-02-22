@@ -68,9 +68,6 @@ GEM
     postmark (1.5.0)
       json
       rake
-    postmark-rails (0.10.0)
-      actionmailer (>= 3.0.0)
-      postmark (~> 1.5.0)
     rack (1.5.2)
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -136,7 +133,7 @@ DEPENDENCIES
   letter_opener
   pg (= 0.18.0.pre20141117110243)
   pony
-  postmark-rails
+  postmark
   rails (= 4.1.8)
   rails_12factor
   thin

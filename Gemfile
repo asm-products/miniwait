@@ -33,5 +33,5 @@ gem 'tzinfo-data'
 group :production do
    gem 'rails_12factor'
    gem 'unicorn'
-   gem 'postmark-rails'
+   gem 'postmark'
 end

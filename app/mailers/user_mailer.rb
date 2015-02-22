@@ -71,8 +71,8 @@ class UserMailer < ApplicationController
       Pony.mail({
                     :to => email_address,
                     :subject => subject,
-                    :body => email_body,
-                    :html_body => wrap_html(email_body),
+                    :body => replace_html(email_body),
+                    :html_body => email_body,
                     :from => 'support@' + Rails.application.config.domain_name
                 })
 
@@ -80,53 +80,31 @@ class UserMailer < ApplicationController
 
    def send_production_email(email_address, subject, email_body)
 
-      # Use API to interact with Heroku add-on Postmark
-      # http://developer.postmarkapp.com/developer-send-api.html
-      # Substitute 'POSTMARK_API_TEST' for postmark_token to test and not send actual emails
-
-
-      rbody ={
-          'From' => 'Support <michael@disambiguator.com>', # TODO: replace email when domain is live
-          'To' => email_address,
-          'Subject' => subject,
-          'HtmlBody' => wrap_html(email_body),
-          'TextBody' => email_body
-      }.to_json
-
-      uri = URI('https://api.postmarkapp.com/email')
-
-      http = Net::HTTP.new(uri.host, uri.port)
-      # http.use_ssl = true
-
-      request = Net::HTTP::Post.new(uri.path, {'Content-Type' => 'application/json', 'Accept' => 'application/json', 'X-Postmark-Server-Token' => Rails.application.config.postmark_token})
-      request.body = rbody
-
-      # Send the request, waiting for the response
+      # Use 'postmark' gem to interact with Heroku add-on Postmark
+      # https://github.com/wildbit/postmark-gem
 
       begin
-         response = http.request(request)
+         client = Postmark::ApiClient.new(Rails.application.config.postmark_token)
+
+         client.deliver(from: 'michael@disambiguator.com', # TODO: replace email when domain is live
+                        to: email_address,
+                        subject: subject,
+                        text_body: replace_html(email_body),
+                        html_body: email_body)
       rescue Exception => e
-         logthis("http request error: #{e.message}")
+         logthis("Postmark email error: #{e.message}")
          return
       end
 
-
-      # Translate response from JSON to string array
-logthis('decode response')
-      parsed_response = ActiveSupport::JSON.decode(response)
-
-      # Log the HTTP response
-      code = parsed_response[0]['ErrorCode']
-      msg = parsed_response[0]['Message']
-
-      logthis("Postmark email response: #{code} #{msg}")
-
    end
 
-   def wrap_html(msg)
-      # Wrap email message in basic html
+   def replace_html(msg)
+      # Replace html tags with pure text characters
 
-      return '<div>' + msg + '</div>'
+      msg = msg.gsub('<div>', 13.chr + 10.chr) # <div> to CR+LF
+      msg = msg.gsub('</div>', 13.chr + 10.chr) # </div> to CR+LF
+      msg = msg.gsub('</br>',13.chr + 10.chr) # <br> to CR+LF
+      return msg
 
    end
 
