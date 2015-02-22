@@ -1,0 +1,36 @@
+<h2>Feedback</h2>
+<div class='container'>
+
+  <% if @person.first_name %>
+        <div><%= @person.first_name %>, we welcome your feedback!</div>
+  <% else %>
+      <div>We welcome your feedback about this application.</div>
+  <% end %>
+
+  <%= render 'shared/user_message' %>
+
+  <form class="form-horizontal" role="form" action="/application/feedback" method="post">
+
+    <% if @person.first_name %>
+        <input type='hidden' value ="#{@person.email_address}" />
+    <% else %>
+        <div class='form-group'>
+          <%= label_tag(:email, "Email:", :class => 'form_label col-sm-2') %>
+          <%= text_field_tag(:email, @person.email_address, :class => 'form_field col-sm-4') %>
+        </div>
+    <% end %>
+
+    <div class='form-group'>
+      <%= label_tag(:comment, "Comment:", :class => 'form_label col-sm-2') %>
+      <%= text_area_tag(:comment, nil, :class => 'form_field col-sm-4') %>
+    </div>
+
+    <div class='form-group'>
+      <%= label_tag(:btn, '', :class => 'form_label col-sm-2') %>
+      <%= submit_tag('Submit', :class => 'btn btn-primary') %>
+    </div>
+
+
+  </form>
+
+</div>

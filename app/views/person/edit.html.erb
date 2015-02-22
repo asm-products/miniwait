@@ -1,56 +1,67 @@
 
 <h2>Edit Profile</h2>
 <%= render 'shared/user_message' %>
-<div class="entry-form">
+<div>
 
-<p>
-<%= form_tag(:controller => "person", :action => "update", :method => "post", :class => 'form-horizontal') do %>
-  
+  <form class="form-horizontal" role="form" action="/person/update" method="post">
+
+  <div class="form-group">
   <%= label_tag(:userName, "User name:", :class => 'form_label col-sm-2') %>
-  <%= text_field_tag(:userName, @person.username, :class => 'form_field') %>
-  <p>
+  <%= text_field_tag(:userName, @person.username, :class => 'form_field col-sm-2') %>
+  </div>
 
+   <div class="form-group">
    <%= label_tag(:firstName, "First name:", :class => 'form_label col-sm-2') %>
-  <%= text_field_tag(:firstName, @person.first_name, :class => 'form_field') %>
-  <p>
+  <%= text_field_tag(:firstName, @person.first_name, :class => 'form_field col-sm-2') %>
+   </div>
 
+  <div class="form-group">
   <%= label_tag(:lastName, "Last name:", :class => 'form_label col-sm-2') %>
-  <%= text_field_tag(:lastName, @person.last_name, :class => 'form_field') %>
-  <p>
-  
+  <%= text_field_tag(:lastName, @person.last_name, :class => 'form_field col-sm-2') %>
+  </div>
+
+  <div class="form-group">
   <%= label_tag(:emailAddress, "Email:", :class => 'form_label col-sm-2') %>
-  <%= text_field_tag(:emailAddress, @person.email_address, :class => 'form_field') %>
-  <p>
+  <%= text_field_tag(:emailAddress, @person.email_address, :class => 'form_field col-sm-3') %>
+  </div>
 
+  <div class="form-group">
   <%= label_tag(:phoneNumber, "Phone number:", :class => 'form_label col-sm-2') %>
-  <%= text_field_tag(:phoneNumber, @person.phone_number, :class => 'form_field') %>
-  <p>  
-  
+  <%= text_field_tag(:phoneNumber, @person.phone_number, :class => 'form_field col-sm-2') %>
+  </div>
+
+  <div class="form-group">
   <%= label_tag(:street1, "Street 1:", :class => 'form_label col-sm-2') %>
-  <%= text_field_tag(:street1, @person.street1, :class => 'form_field') %>
-  <p>
- 
+  <%= text_field_tag(:street1, @person.street1, :class => 'form_field col-sm-2') %>
+  </div>
+
+  <div class="form-group">
   <%= label_tag(:street2, "Street 2:", :class => 'form_label col-sm-2') %>
-  <%= text_field_tag(:street2, @person.street2, :class => 'form_field') %>
-  <p>
+  <%= text_field_tag(:street2, @person.street2, :class => 'form_field col-sm-2') %>
+  </div>
 
-  <%= label_tag(:street1, "City, State:", :class => 'form_label col-sm-2') %><%= text_field_tag(:city, @person.city, :class => 'form_field') %><%= text_field_tag(:stateProvince, @person.state_province, :class => 'form_field') %>
-  <p>  
- 
+  <div class="form-group">
+  <%= label_tag(:street1, "City, State:", :class => 'form_label col-sm-2') %><%= text_field_tag(:city, @person.city, :class => 'form_field col-sm-2') %><%= text_field_tag(:stateProvince, @person.state_province, :class => 'form_field col-sm-1') %>
+  </div>
+
+  <div class="form-group">
   <%= label_tag(:postalCode, "Zip/Postal:", :class => 'form_label col-sm-2') %>
-  <%= text_field_tag(:postalCode, @person.postal_code, :class => 'form_field') %>
-  <p>
-  
-  <%= label_tag(:country, "Country:", :class => 'form_label col-sm-2') %>
-  <%= text_field_tag(:country, @person.country, :class => 'form_field') %>
-  <p>
+  <%= text_field_tag(:postalCode, @person.postal_code, :class => 'form_field col-sm-2') %>
+  </div>
 
+  <div class="form-group">
+  <%= label_tag(:country, "Country:", :class => 'form_label col-sm-2') %>
+  <%= text_field_tag(:country, @person.country, :class => 'form_field col-sm-1') %>
+  </div>
+
+  <div class="form-group">
   <%= label_tag(:btn, '', :class => 'form_label col-sm-2') %>
   <%= submit_tag("Save", :class => 'btn btn-primary') %>
-  
-  <p>
+  </div>
+
+
   <%= link_to "Change Password", :controller => "person", :action => "change_password" %>
   
-<% end %>
+</form>
 </div>
 

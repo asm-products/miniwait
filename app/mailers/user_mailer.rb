@@ -84,9 +84,7 @@ class UserMailer < ApplicationController
       # http://developer.postmarkapp.com/developer-send-api.html
       # Substitute 'POSTMARK_API_TEST' for postmark_token to test and not send actual emails
 
-
       uri = URI('https://api.postmarkapp.com/email')
-
 
       # Form the request
       req = Net::HTTP::Post.new(uri)
@@ -107,7 +105,7 @@ class UserMailer < ApplicationController
       req.body = rbody
 
       # Send the request, waiting for the response
-logthis('send request')
+
       begin
          response = Net::HTTP.new(uri.host, uri.port).start {|http| http.request(req) }
       rescue Exception => e

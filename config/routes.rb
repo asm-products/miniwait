@@ -7,6 +7,9 @@ Rails.application.routes.draw do
   get 'home' => 'home#show'
   post 'home/signup'
 
+  # Application
+  match 'application/feedback', via: [:get, :post]
+
   # Person
   get 'person/index'
   get 'person/edit'

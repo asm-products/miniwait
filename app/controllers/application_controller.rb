@@ -37,6 +37,29 @@ class ApplicationController < ActionController::Base
 	
 	 return
 	
-  end
+   end
+
+   def feedback
+
+      # populate user email if they are logged in (it's just polite)
+      if session[:user_id]
+         @person = Person.find(session[:user_id])
+      else
+         @person = Person.new
+      end
+
+      if request.post?
+         if params[:email] && params[:comment]
+            mailer = UserMailer.new()
+            mailer.send_feedback(params[:email], params[:comment])
+         else
+            flash[:user_message] = 'Please enter an email address and your comment before submitting.'
+         end
+         flash[:user_message] = 'Thank you for your feedback.'
+         render 'feedback'
+      else
+         # fall through to feedback form
+      end
+   end
   
 end
