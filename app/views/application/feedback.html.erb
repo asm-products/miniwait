@@ -11,14 +11,14 @@
 
   <form class="form-horizontal" role="form" action="/application/feedback" method="post">
 
-    <% if @person.first_name %>
-        <input type='hidden' value ="#{@person.email_address}" />
-    <% else %>
-        <div class='form-group'>
-          <%= label_tag(:email, "Email:", :class => 'form_label col-sm-2') %>
-          <%= text_field_tag(:email, @person.email_address, :class => 'form_field col-sm-4') %>
-        </div>
-    <% end %>
+    <div class='form-group'>
+      <%= label_tag(:email, "Email:", :class => 'form_label col-sm-2') %>
+      <% if @person.first_name %>
+          <%= text_field_tag(:email, @person.email_address, :class => 'form_field col-sm-4', :disabled => true) %>
+      <% else %>
+          <%= text_field_tag(:email, nil, :class => 'form_field col-sm-4') %>
+      <% end %>
+    </div>
 
     <div class='form-group'>
       <%= label_tag(:comment, "Comment:", :class => 'form_label col-sm-2') %>
