@@ -48,7 +48,10 @@ class ApplicationController < ActionController::Base
          @person = Person.new
       end
 
+
       if request.post?
+ logthis('email: ' + params[:email] + ', comment: ' + params[:comment])
+
          if (params[:email].blank? || params[:comment].blank?)
             flash[:user_message] = 'Please enter an email address and your comment before submitting.'
          else
