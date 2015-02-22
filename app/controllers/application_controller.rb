@@ -49,12 +49,12 @@ class ApplicationController < ActionController::Base
       end
 
       if request.post?
-         if !params[:email].blank? && !params[:comment].blank?
+         if (params[:email].blank? || params[:comment].blank?)
+            flash[:user_message] = 'Please enter an email address and your comment before submitting.'
+         else
             mailer = UserMailer.new()
             mailer.send_feedback(params[:email], params[:comment])
             flash[:user_message] = 'Thank you for your feedback.'
-         else
-            flash[:user_message] = 'Please enter an email address and your comment before submitting.'
          end
          render 'feedback'
       else
