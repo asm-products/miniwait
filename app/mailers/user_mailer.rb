@@ -36,11 +36,11 @@ class UserMailer < ApplicationController
 
    end
 
-   def send_feedback(userName, comment)
+   def send_feedback(email_address, comment)
 
       # Send feedback from user to support
 
-      email_body = 'From: ' + userName + '<br/><br/>Comments:<br/>' + comment
+      email_body = 'From: ' + email_address + '<br/><br/>Comments:<br/>' + comment
       send_mail("support@#{Rails.application.config.domain_name}", Rails.application.config.app_name + ' Comment', email_body)
 
    end
