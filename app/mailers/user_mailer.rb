@@ -84,15 +84,6 @@ class UserMailer < ApplicationController
       # http://developer.postmarkapp.com/developer-send-api.html
       # Substitute 'POSTMARK_API_TEST' for postmark_token to test and not send actual emails
 
-      uri = URI('https://api.postmarkapp.com/email')
-
-      # Form the request
-      req = Net::HTTP::Post.new(uri)
-
-      # Set request headers
-      req['Accept'] = 'application/json'
-      req['Content-Type'] = 'application/json'
-      req['X-Postmark-Server-Token'] = Rails.application.config.postmark_token
 
       rbody ={
           'From' => 'Support <michael@disambiguator.com>', # TODO: replace email when domain is live
@@ -102,12 +93,18 @@ class UserMailer < ApplicationController
           'TextBody' => email_body
       }.to_json
 
-      req.body = rbody
+      uri = URI('https://api.postmarkapp.com/email')
+
+      http = Net::HTTP.new(uri.host, uri.port)
+      # http.use_ssl = true
+
+      request = Net::HTTP::Post.new(uri.path, {'Content-Type' => 'application/json', 'Accept' => 'application/json', 'X-Postmark-Server-Token' => Rails.application.config.postmark_token})
+      request.body = rbody
 
       # Send the request, waiting for the response
 
       begin
-         response = Net::HTTP.new(uri.host, uri.port).start {|http| http.request(req) }
+         response = http.request(request)
       rescue Exception => e
          logthis("http request error: #{e.message}")
          return
