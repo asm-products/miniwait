@@ -5,7 +5,11 @@ class Person < ActiveRecord::Base
 
    validates_presence_of :username, :first_name, :last_name, :email_address
 
+   geocoded_by :full_address
+   after_validation :geocode
+
    require 'digest/sha2'
+
 
    def unique
       # Return true if this new person is unique by: username and email_address
@@ -36,4 +40,8 @@ class Person < ActiveRecord::Base
       self.last_name + ', ' + self.first_name
    end
 
+   def full_address
+      return self.street1 + ' ' + self.street2 + ', ' + self.city + ', ' + self.state_province + ' ' + self.postal_code + ' ' + self.country
+   end
 end
+

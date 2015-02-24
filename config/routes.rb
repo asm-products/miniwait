@@ -43,6 +43,7 @@ Rails.application.routes.draw do
   get 'location/update_wait_time'
   post 'location/update'
   post 'location/destroy'
+  match 'location/search', via: [:get, :post]
 
   # Service
   get 'service/index'

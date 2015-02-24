@@ -20,6 +20,8 @@ gem 'pony' # easier email
 
 gem 'figaro', '~> 0.7.0' # set ENV variables via application.yml
 
+gem 'geocoder'
+
 group :development do
    gem 'thin' # light-weight web server
    gem 'letter_opener' # view emails locally without sending

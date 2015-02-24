@@ -155,6 +155,4 @@ class CompanyController < ApplicationController
     @company = Company.find(params[:company_id])
   end
 
-  def location
-  end
 end

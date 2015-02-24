@@ -235,4 +235,31 @@ class LocationController < ApplicationController
 
   def destroy
   end
+
+  def search
+     # Search for businesses of interest that are nearby
+     # params: name, category_id, near (zip), distance
+
+     # Load the logged in user to start with their location (zip)
+     @person = Person.find(session[:user_id])
+
+     if request.post?
+        @criteria = params.dup
+        addr = @criteria[:near]
+        max_distance = @criteria[:distance]
+        locs = Location.near(addr, max_distance).order('distance')
+        @results = Array.new
+        locs.each do |loc|
+           res = {:id => loc.id, :company_name => loc.company.name, :loc_name => loc.loc_name, :category_description => loc.company.category.description,
+               :address => loc.street1 + ', ' + loc.city, :distance => loc.distance.round(2)}
+           @results << res
+        end
+     else
+        @criteria         = {}
+        @criteria[:distance] = 10 # miles
+        @criteria[:near] = @person.full_address
+        @results = []
+     end
+  end
+
 end
