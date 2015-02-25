@@ -247,12 +247,24 @@ class LocationController < ApplicationController
         @criteria = params.dup
         addr = @criteria[:near]
         max_distance = @criteria[:distance]
+
         locs = Location.near(addr, max_distance).order('distance')
         @results = Array.new
         locs.each do |loc|
-           res = {:id => loc.id, :company_name => loc.company.name, :loc_name => loc.loc_name, :category_description => loc.company.category.description,
-               :address => loc.street1 + ', ' + loc.city, :distance => loc.distance.round(2)}
-           @results << res
+           wanted = true
+           if (@criteria[:name].present? && !(loc.company.name.downcase.include? @criteria[:name].downcase))
+               wanted = false
+           end
+logthis("category_id = #{@criteria[:category_id]}, company category = #{loc.company.category_id}")
+           if (@criteria[:category_id].present? && loc.company.category_id != @criteria[:category_id].to_i)
+              wanted = false
+           end
+           if wanted
+               res = {:id => loc.id, :company_name => loc.company.name, :loc_name => loc.loc_name, :category_description => loc.company.category.description,
+                    :address => loc.street1 + ', ' + loc.city, :distance => loc.distance.round(2)}
+               @results << res
+           end
+
         end
      else
         @criteria         = {}
@@ -263,3 +275,4 @@ class LocationController < ApplicationController
   end
 
 end
+

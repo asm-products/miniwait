@@ -9,5 +9,5 @@ end
 
 
 def full_address
-   return self.street1 + ' ' + self.street2 + ', ' + self.city + ', ' + self.state_province + ' ' + self.postal_code + ' ' + self.country
+   [street1, street2, city, state_province, postal_code, country].compact.join(', ')
 end
