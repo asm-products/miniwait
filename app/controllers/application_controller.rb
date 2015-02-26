@@ -33,7 +33,7 @@ class ApplicationController < ActionController::Base
 	 @stackTrace = exception.backtrace
 	
 	 # html page "show_error" displays error and offers login
-	 render "show_error" and return
+	 render 'show_error' and return
 	
 	 return
 	
@@ -63,5 +63,11 @@ class ApplicationController < ActionController::Base
          # fall through to feedback form
       end
    end
-  
+
+   def my_ip_address
+      require 'socket'
+      list=Socket.ip_address_list
+      ip = list.detect{|intf| intf.ipv4_private?}
+      ip.ip_address if ip
+   end
 end

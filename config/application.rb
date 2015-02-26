@@ -9,10 +9,10 @@ Bundler.require(*Rails.groups)
 module AppConfig
   class Application < Rails::Application
     
-	config.app_name = 'Wait-Killer'
+	config.app_name = 'MiniWait'
 	# usage: <%= Rails.application.config.app_name %>
 	
-	config.domain_name = 'waitkiller.com'
+	config.domain_name = 'miniwait.com'
 	# usage: <%= Rails.application.config.domain_name %>
 	
   end

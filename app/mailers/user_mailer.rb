@@ -86,7 +86,9 @@ class UserMailer < ApplicationController
       begin
          client = Postmark::ApiClient.new(Rails.application.config.postmark_token)
 
-         client.deliver(from: 'michael@disambiguator.com', # TODO: replace email when domain is live
+         from_addr = Rails.application.config.app_name + ' <michael@disambiguator.com>' # TODO: replace email when domain is live
+
+         client.deliver(from: from_addr,
                         to: email_address,
                         subject: subject,
                         text_body: replace_html(email_body),
