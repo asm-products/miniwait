@@ -68,6 +68,7 @@ class ApplicationController < ActionController::Base
       require 'socket'
       list=Socket.ip_address_list
       ip = list.detect{|intf| intf.ipv4_private?}
+logthis("IP: #{ip}")
       ip.ip_address if ip
    end
 end

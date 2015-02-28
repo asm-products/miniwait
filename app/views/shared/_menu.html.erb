@@ -12,15 +12,16 @@
 %>
 
   <ul class="nav nav-pills" role='tablist'>
-    <li><a href='/home/show'>Home</a></li>
+    <% if @person.username.present? %>
+        <li><a href="/person/dashboard">Dashboard</a></li>
+    <% else %>
+        <li><a href='/home/show'>Home</a></li>
+    <% end %>
     <li><a href="#">About</a></li>
     <li class="dropdown">
         <a class="dropdown-toggle" data-toggle="dropdown" href="#">Menu <span class="caret"></span></a>
         <ul class="dropdown-menu" role="menu">
-            <% if @person.username.nil? %>
-                <li><a href='/person/login'>Log In</a></li>
-            <% else %>
-                <li><a href="/person/dashboard">Dashboard</a></li>
+            <% if @person.username.present? %>
                 <li><a href="/person/edit">My Profile</a></li>
                 <li><a href="/company/new">Add Company</a></li>
                 <% if !@person.companies.empty? %>
@@ -33,5 +34,8 @@
             <% end %>
         </ul> <!-- dropdown-menu -->
     </li> <!-- dropdown -->
+    <% if @person.username.nil? %>
+        <li><a href='/person/login'>Log In</a></li>
+    <% end %>
   </ul>
 
