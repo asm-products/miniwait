@@ -41,8 +41,17 @@ class UserMailer < ApplicationController
       # Send feedback from user to support
 
       email_body = 'From: ' + email_address + '<br/><br/>Comments:<br/>' + comment
-      send_mail('michael@disambiguator.com', Rails.application.config.app_name + ' Comment', email_body)
-      # TODO: change email to support@#{Rails.application.config.domain_name}
+      send_mail(Rails.application.config.support_email, Rails.application.config.app_name + ' Comment', email_body)
+   end
+
+   def send_error_report(email_address, comment, error_message, stack_trace)
+
+      # Send error report from user to support
+
+      email_body = 'From: ' + email_address + '<br/><br/>Comments:<br/>' + comment + \
+         '<br /><br />ERROR<br />' + error_message + '<br /><br />STACK TRACE<br />' + stack_trace
+
+      send_mail(Rails.application.config.support_email, Rails.application.config.app_name + ' ERROR', email_body)
    end
 
    def send_mail(email_address, subject, email_body)
@@ -86,7 +95,7 @@ class UserMailer < ApplicationController
       begin
          client = Postmark::ApiClient.new(Rails.application.config.postmark_token)
 
-         from_addr = Rails.application.config.app_name + ' <michael@disambiguator.com>' # TODO: replace email when domain is live
+         from_addr = Rails.application.config.app_name + ' <' + Rails.application.config.support_email + '>'
 
          client.deliver(from: from_addr,
                         to: email_address,

@@ -14,6 +14,8 @@ module AppConfig
 	
 	config.domain_name = 'miniwait.com'
 	# usage: <%= Rails.application.config.domain_name %>
-	
+
+   config.support_email = 'michael@disambiguator.com' # TODO: replace with commercial support account
+
   end
 end

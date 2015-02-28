@@ -139,7 +139,8 @@ class PersonController < ApplicationController
 
          # Get country from IP if not present
          if @person.country.blank?
-            ip_loc = Geocoder.search(my_ip_address)
+#            ip_loc = Geocoder.search(my_ip_address)
+            ip_loc = Geocoder.search(request.remote_ip)
 logthis("ip_loc: #{ip_loc.inspect}")
           if ip_loc.present?
             @person.country = ip_loc[0].data['country_code']

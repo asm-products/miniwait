@@ -1,13 +1,37 @@
-<h1>OOPS!</h1>
-<div style="margin-top: 20px;">Something unexpected happened.</div>
-<div>Isn't that special?</div>
-<h2>Error</h2>
-<div style="margin-top: 20px;">
-   <div class="user_message"><%= @errorMessage %></div>
+<h1>Aw Snap!</h1>
+<div class='text-danger'>Something unexpected happened.<br/>
+  We need your help to diagnose the problem.
 </div>
+<h3>Error Message</h3>
+<p><%= @errorMessage %></p>
+
+<p class='text-info'>Please tell us what you were trying to do when this happened:</p>
+<form class="form-horizontal" role="form" action="/application/report_error" method="post">
+
+  <div class='form-group'>
+    <%= label_tag(:email, 'Email:', :class => 'form_label col-sm-2') %>
+    <%= text_field_tag(:email, nil, :class => 'form_field col-sm-4') %>
+  </div>
+
+  <div class='form-group'>
+    <%= label_tag(:comment, 'Comment:', :class => 'form_label col-sm-2') %>
+    <%= text_area_tag(:comment, nil, :class => 'form_field col-sm-4', :rows => '10') %>
+  </div>
+
+  <div class='form-group'>
+    <%= label_tag(:btn, '', :class => 'form_label col-sm-2') %>
+    <%= submit_tag('Submit', :class => 'btn btn-primary') %>
+  </div>
+
+  <input type='hidden' name='error_message' value="<%= @errorMessage %>">
+
+  <input type='hidden' name='stack_trace' value="<%= @stackTrace %>">
+
+</form>
+
+<!-- turn this back on in a period of heavy change/testing
 <h2>Stack Trace</h2>
 <div>
    <div style="font-size:.7em;color:gray;"><%= @stackTrace %></div>
 </div>
-
-<%= link_to "Home", :controller => "home", :action => "show" %>
+-->

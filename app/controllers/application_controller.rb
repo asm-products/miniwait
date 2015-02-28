@@ -26,17 +26,28 @@ class ApplicationController < ActionController::Base
 	 end
   end
   
-   def show_error(exception)
+   def show_error(exc)
 
-     logthis(exception.message)
-	 @errorMessage = exception.message
-	 @stackTrace = exception.backtrace
+     logthis(exc.message)
+	 @errorMessage = exc.message
+	 @stackTrace = exc.backtrace
 	
 	 # html page "show_error" displays error and offers login
 	 render 'show_error' and return
 	
 	 return
 	
+   end
+
+   def report_error
+      if params[:error_message].present?
+         mailer = UserMailer.new()
+         mailer.send_error_report(params[:email], params[:comment], params[:error_message], params[:stack_trace])
+         flash[:user_message] = 'Thank you for your feedback.'
+      end
+
+      redirect_to :controller => 'home', :action => 'show'
+
    end
 
    def feedback
@@ -70,5 +81,19 @@ class ApplicationController < ActionController::Base
       ip = list.detect{|intf| intf.ipv4_private?}
 logthis("IP: #{ip}")
       ip.ip_address if ip
+   end
+
+   def test_error
+      begin
+         x = 1/0
+      rescue Exception => e
+         show_error(e)
+      end
+   end
+
+   at_exit do
+      if $!
+         show_error($!)
+      end
    end
 end
