@@ -1,7 +1,7 @@
 class CompanyController < ApplicationController
 
   def index
-    @companies = Person.find(session[:user_id]).companies
+    @companies = current_user.companies
   end
 
   def new
@@ -39,7 +39,7 @@ class CompanyController < ApplicationController
             # Also create a link between the logged in user and this company
             contact = CompanyContact.new
             contact.company_id = company.id
-            contact.person_id = session[:user_id]
+            contact.person_id = current_user.id
             contact.is_primary = true # first person to create a company becomes primary contact
             if !contact.save
               raise 'Failed to save CompanyContact record for new Company'

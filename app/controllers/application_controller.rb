@@ -1,5 +1,19 @@
 class ApplicationController < ActionController::Base
 
+   # General trap for unhandled errors
+   rescue_from Exception::StandardError, with: :handle_error
+
+   def handle_error
+      if $!
+         show_error($!)
+      end
+   end
+
+   def current_user
+      return unless session[:user_id]
+      @current_user ||= Person.find(session[:user_id])
+   end
+
    def logthis(msg)
       logger.debug "\n===================================="
       logger.debug msg
@@ -17,7 +31,7 @@ class ApplicationController < ActionController::Base
   end
   
   def check_authenticated(functionName)
-     if session[:user_id].nil?
+     if current_user.nil?
 	    begin
 	       raise "Cannot use #{functionName} without being logged in."
 		rescue Exception => e
@@ -53,8 +67,8 @@ class ApplicationController < ActionController::Base
    def feedback
 
       # populate user email if they are logged in (it's just polite)
-      if session[:user_id]
-         @person = Person.find(session[:user_id])
+      if current_user
+         @person = current_user
       else
          @person = Person.new
       end
@@ -75,25 +89,10 @@ class ApplicationController < ActionController::Base
       end
    end
 
-   def my_ip_address
-      require 'socket'
-      list=Socket.ip_address_list
-      ip = list.detect{|intf| intf.ipv4_private?}
-logthis("IP: #{ip}")
-      ip.ip_address if ip
-   end
-
    def test_error
-      begin
-         x = 1/0
-      rescue Exception => e
-         show_error(e)
-      end
+      # For testing unhandled errors
+      x = 1/0
    end
 
-   at_exit do
-      if $!
-         show_error($!)
-      end
-   end
+
 end

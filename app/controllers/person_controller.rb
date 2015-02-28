@@ -74,7 +74,7 @@ class PersonController < ApplicationController
    def change_password
       # Change my password
 
-      if session[:user_id].nil?
+      if current_user.nil?
          raise 'Change password function is only available when logged in.'
       end
 
@@ -102,7 +102,7 @@ class PersonController < ApplicationController
 
       if warnings.empty?
 
-         @person = Person.find(session[:user_id])
+         @person = current_user
 
          @person.password = pw1
          @person.save
@@ -131,17 +131,15 @@ class PersonController < ApplicationController
 
    def edit
       # Load person from session user id
-      if session[:user_id].blank?
+      if current_user.nil?
          flash[:user_message] = "User id not found - unexpected."
          @person = Person.new
       else
-         @person = Person.find(session[:user_id])
+         @person = current_user
 
          # Get country from IP if not present
          if @person.country.blank?
-#            ip_loc = Geocoder.search(my_ip_address)
             ip_loc = Geocoder.search(request.remote_ip)
-logthis("ip_loc: #{ip_loc.inspect}")
           if ip_loc.present?
             @person.country = ip_loc[0].data['country_code']
           end
@@ -152,7 +150,7 @@ logthis("ip_loc: #{ip_loc.inspect}")
    def update
       # Save an edited profile, checking rules
 
-      @person = Person.find(session[:user_id])
+      @person = current_user
 
       warning_messages = Array.new
 
@@ -263,11 +261,11 @@ logthis("ip_loc: #{ip_loc.inspect}")
    end
 
    def dashboard
-      if session[:user_id].nil?
+      @person = current_user
+
+      if @person.nil?
          flash[:user_message] = 'Dashboard only available when logged in.'
          redirect_to :controller => 'person', :action => 'login'
-      else
-         @person = Person.find(session[:user_id])
       end
       # Fall through to the view
    end

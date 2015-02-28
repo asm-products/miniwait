@@ -241,7 +241,7 @@ class LocationController < ApplicationController
      # params: name, category_id, near (zip), distance
 
      # Load the logged in user to start with their location (zip)
-     @person = Person.find(session[:user_id])
+     @person = current_user
 
      if request.post?
         @criteria = params.dup

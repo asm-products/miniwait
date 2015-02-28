@@ -5,7 +5,6 @@ class HomeController < ApplicationController
 	end
 
 
-
 	def signup
 		# Validate the incoming signup form parameters and create new Person record
 
@@ -106,6 +105,5 @@ class HomeController < ApplicationController
 		end
 
 	end
-
 
 end

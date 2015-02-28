@@ -27,6 +27,7 @@ group :development do
    gem 'letter_opener' # view emails locally without sending
    gem 'dotenv-rails' # load ENV vars from .env file
    gem 'debase'
+   gem 'better_errors'
 end
 
 # Need time zone info
