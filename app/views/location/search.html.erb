@@ -37,7 +37,7 @@
       </div>
         <% @results.each do |loc| %>
             <div class='row'>
-                <div class='col-sm-2'><a href="/location/show?id=<%= loc[:id] %>"><%= loc[:company_name] %></a></div>
+                <div class='col-sm-2'><a href="/location/view?id=<%= loc[:id] %>"><%= loc[:company_name] %></a></div>
                 <div class='col-sm-2'><%= loc[:category_description] %></div>
                 <div class='col-sm-2'><%= loc[:loc_name] %></div>
                 <div class='col-sm-3'><%= loc[:address] %></div>

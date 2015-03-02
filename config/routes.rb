@@ -39,6 +39,8 @@ Rails.application.routes.draw do
   get 'location/new'
   post 'location/create'
   get 'location/show'
+  get 'location/view'
+  get 'location/watch'
   get 'location/edit'
   get 'location/add_service'
   get 'location/remove_service'

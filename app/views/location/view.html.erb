@@ -1,0 +1,19 @@
+<h2><%= @company.name %></h2>
+<h3>Location: <%= @location.loc_name %></h3>
+<%= render 'shared/user_message' %>
+<div>
+  <table class='table-striped table-bordered'>
+    <th>Service</th>
+    <th>Wait Time (minutes)</th>
+    <th>Watch</th>
+    <% @location_services.each do |sloc| %>
+        <tr>
+          <td><%= sloc.service.description %></td>
+          <td><%= sloc.wait_time %></td>
+          <td><a href='/location/watch?id=<%= sloc.id %>'><button type="button" class="btn btn-default btn-sm">
+            <span class="glyphicon glyphicon-eye-open" /></button></a></td>
+        </tr>
+    <% end %>
+
+  </table>
+</div>

@@ -95,10 +95,25 @@ class LocationController < ApplicationController
   end
 
   def show
-	  # Display one company location with service wait times
+	  # Display one company location to allow adjustment of service wait times (for company staff)
 	  @location = Location.find(params[:id])
 	  @company = Company.find(@location.company_id)
 	  @location_services = @location.service_locations.order(service_id: :asc)
+  end
+
+  def view
+     # Display one company location with service wait times (for consumer)
+     @location = Location.find(params[:id])
+     @company = Company.find(@location.company_id)
+     @location_services = @location.service_locations.order(service_id: :asc)
+  end
+
+  def watch
+     # Add this location service to consumer watch list
+     @service_loc = ServiceLocation.find(params[:id])
+
+     # TODO: get service_location id, combine with user_id into service_watches
+     redirect_to :controller => 'location', :action => 'view', :id => @service_loc.location.id
   end
 
   def edit

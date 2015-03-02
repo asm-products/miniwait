@@ -2,15 +2,11 @@
 <project version="4">
   <component name="dataSourceStorageLocal">
     <data-source name="Rails waitkiller: development" uuid="edcf2523-0387-484f-a820-412d382d1075">
-      <first-sync>true</first-sync>
       <user-name>admin</user-name>
       <user-password>dfdddfc1dfcbdfcedfc7dfc3dfc4</user-password>
     </data-source>
-    <data-source name="Rails waitkiller: test" uuid="bc930274-a798-49da-9e15-3c3a9b7c1a69">
-      <first-sync>true</first-sync>
-    </data-source>
+    <data-source name="Rails waitkiller: test" uuid="bc930274-a798-49da-9e15-3c3a9b7c1a69" />
     <data-source name="Rails waitkiller: production" uuid="ca4217b4-e32a-4f21-b28a-8295e1726726">
-      <first-sync>true</first-sync>
       <user-name>wait-killer</user-name>
       <user-password>df96df8fdf97df8adfefdfe4dffcdff1df8ddffddfebdfe3dffedff5dfe1dfe3dfe6dfe6dfefdff8dff5dfeedfebdffedfebdfe8dfebdff9dfefdff5dffadfebdff9dff9dffddfe5dff8dfeedf8ddff7df8adf8fdf94</user-password>
     </data-source>
