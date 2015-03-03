@@ -10,8 +10,13 @@
         <tr>
           <td><%= sloc.service.description %></td>
           <td><%= sloc.wait_time %></td>
-          <td><a href='/location/watch?id=<%= sloc.id %>'><button type="button" class="btn btn-default btn-sm">
-            <span class="glyphicon glyphicon-eye-open" /></button></a></td>
+          <% if (sloc.watching > 0) %>
+              <td><a href='/location/unwatch?id=<%= sloc.id %>'><button type="button" class="btn btn-default btn-sm">
+                <span class="glyphicon glyphicon-eye-close" /> Unwatch</button></a></td>
+          <% else %>
+              <td><a href='/location/watch?id=<%= sloc.id %>'><button type="button" class="btn btn-default btn-sm">
+                <span class="glyphicon glyphicon-eye-open" /> Watch</button></a></td>
+          <% end %>
         </tr>
     <% end %>
 

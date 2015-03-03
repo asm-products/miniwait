@@ -105,15 +105,38 @@ class LocationController < ApplicationController
      # Display one company location with service wait times (for consumer)
      @location = Location.find(params[:id])
      @company = Company.find(@location.company_id)
-     @location_services = @location.service_locations.order(service_id: :asc)
+
+     # Return location services, adding whether this person is 'watching' a service
+     sql = "SELECT sl.id, sl.location_id, sl.service_id, sl.wait_time, COALESCE(sw.person_id,0) AS watching"
+     sql += " FROM service_locations sl"
+     sql += " LEFT JOIN service_watches AS sw ON sl.id = sw.service_location_id AND sw.person_id = #{current_user.id}"
+     sql += " WHERE location_id = #{@location.id}"
+     sql += " ORDER BY sl.service_id"
+     @location_services = ServiceLocation.find_by_sql(sql)
+
   end
 
   def watch
      # Add this location service to consumer watch list
      @service_loc = ServiceLocation.find(params[:id])
 
-     # TODO: get service_location id, combine with user_id into service_watches
+     if @service_loc
+        ServiceWatch.create(service_location_id: @service_loc.id, person_id: current_user.id )
+     end
+
      redirect_to :controller => 'location', :action => 'view', :id => @service_loc.location.id
+  end
+
+  def unwatch
+     # Remove this location service from consumer watch list
+     @service_loc = ServiceLocation.find(params[:id])
+
+     if @service_loc
+        ServiceWatch.destroy_all(:service_location_id => @service_loc.id, :person_id => current_user.id )
+     end
+
+     redirect_to :controller => 'location', :action => 'view', :id => @service_loc.location.id
+
   end
 
   def edit
@@ -270,7 +293,6 @@ class LocationController < ApplicationController
            if (@criteria[:name].present? && !(loc.company.name.downcase.include? @criteria[:name].downcase))
                wanted = false
            end
-logthis("category_id = #{@criteria[:category_id]}, company category = #{loc.company.category_id}")
            if (@criteria[:category_id].present? && loc.company.category_id != @criteria[:category_id].to_i)
               wanted = false
            end
