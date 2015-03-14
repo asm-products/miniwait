@@ -4,6 +4,7 @@ class ServiceController < ApplicationController
   end
 
   def create
+    # Add service to this company
     d = params[:description]
     if d.blank?
       flash[:user_message] = 'Service name cannot be blank'

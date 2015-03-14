@@ -130,6 +130,7 @@ class PersonController < ApplicationController
    end
 
    def edit
+      check_authenticated(__method__) # error if user not logged in
       # Load person from session user id
       if current_user.nil?
          flash[:user_message] = "User id not found - unexpected."

@@ -83,10 +83,15 @@ class CompanyController < ApplicationController
   end
 
   def edit
+     check_authenticated(__method__) # error if user not logged in
     if params[:company_id].nil?
       raise 'Company edit called without id'
     else
-      @company = Company.find(params[:company_id])
+      if current_user.my_company(params[:company_id])
+         @company = Company.find(params[:company_id])
+      else
+         raise 'Company edit called with unauthorized id.'
+      end
     end
   end
 

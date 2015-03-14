@@ -1,7 +1,8 @@
 class ApplicationController < ActionController::Base
 
    # General trap for unhandled errors
-   rescue_from Exception::StandardError, with: :handle_error
+#   rescue_from Exception::StandardError, with: :handle_error
+   rescue_from Exception, with: :handle_error
 
    def handle_error
       if $!

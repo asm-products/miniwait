@@ -1,9 +1,9 @@
 <h1>Aw Snap!</h1>
-<div class='text-danger'>Something unexpected happened.<br/>
+<div class='text-info'>Something unexpected happened.<br/>
   We need your help to diagnose the problem.
 </div>
-<h3>Error Message</h3>
-<p><%= @errorMessage %></p>
+<h4>Error Message:</h4>
+<blockquote class='text-danger'><%= @errorMessage %></blockquote>
 
 <p class='text-info'>Please tell us what you were trying to do when this happened:</p>
 <form class="form-horizontal" role="form" action="/application/report_error" method="post">
