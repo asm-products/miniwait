@@ -1,6 +1,39 @@
+/* Media queries based on Bootstrap 3 screen sizes
+*  http://stackoverflow.com/questions/18424798/twitter-bootstrap-3-how-to-use-media-queries
+*/
 
+/* Large desktops and laptops */
+@media (min-width: 1200px) {
+
+
+}
+
+/* Portrait tablets and medium desktops */
+@media (min-width: 992px) and (max-width: 1199px) {
+
+
+}
+
+/* Portrait tablets and small desktops */
+@media (min-width: 768px) and (max-width: 991px) {
+
+
+}
+
+/* Landscape phones and portrait tablets */
+@media (max-width: 767px) {
+
+
+}
+
+/* Landscape phones and smaller */
+@media (max-width: 480px) {
+
+
+}
 
 .main_menu {
-    float: right;
+    float: none;
     position: relative;
 }
+

@@ -10,7 +10,7 @@
       end
    end
 %>
-
+<div class='main_menu'>
   <ul class="nav nav-pills" role='tablist'>
     <% if @person.username.present? %>
         <li><a href="/person/dashboard">Dashboard</a></li>
@@ -38,4 +38,4 @@
         <li><a href='/person/login'>Log In</a></li>
     <% end %>
   </ul>
-
+</div>
