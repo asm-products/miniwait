@@ -2,7 +2,6 @@
 
   <h2>Log In</h2>
   <%= render 'shared/user_message' %>
-  <p class='text-info'>Enter your login credentials below.</p>
 
   <form class="form-horizontal" role="form" action="/person/authenticate" method="post">
 
@@ -21,8 +20,8 @@
       <%= submit_tag("Log In", :class => 'btn btn-primary') %>
     </div>
 
-    <div>
-      <%= link_to "Forgot password", :controller => "person", :action => "forgot_password" %>
+    <div class='text-muted vspace'>
+      Can't remember your login information? It happens. Click <%= link_to "here", :controller => "person", :action => "forgot_password" %> for help.
     </div>
 
   </form>

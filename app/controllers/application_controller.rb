@@ -96,4 +96,8 @@ class ApplicationController < ActionController::Base
    end
 
 
+   def about
+      # fall through to view page
+   end
+
 end

@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   # Application
   match 'application/feedback', via: [:get, :post]
   get 'application/test_error'
+  get 'application/about'
   post 'application/report_error'
 
   # Person

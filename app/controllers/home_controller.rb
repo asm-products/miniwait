@@ -4,7 +4,6 @@ class HomeController < ApplicationController
 		@person = Person.new
 	end
 
-
 	def signup
 		# Validate the incoming signup form parameters and create new Person record
 

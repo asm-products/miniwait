@@ -1,8 +1,37 @@
 
-<div class='jumbotron'>
-  <h1>MiniWait</h1>
-  <p>See wait times at your favorite local businesses!</p>
+<div class='row'>
+    <div class='col-md-6'>
+        <div class='jumbotron'>
+          <h1><%= Rails.application.config.app_name %></h1>
+          <p>Avoid the Wait!</p>
+        </div>
+    </div>
+
+    <div class='col-md-4'>
+      <%= image_tag('miniwait.png', size: '240', class: 'img-responsive img-rounded', alt: 'MiniWait') %>
+    </div>
 </div>
 
-<%= render "shared/signup" %>
+<div class='row'>
+    <div class='col-md-5'>
+      <p class='lead'>See wait times for local services.</p>
+      <p>Minimize the time you spend waiting in line. Visit your favorite local business when the line is small.</p>
+        <h3>Consumer Benefits</h3>
+        <ul>
+          <li>Reduced wait time</li>
+          <li>Wait time notifications (watch)</li>
+          <li>Favorite companies list</li>
+        </ul>
+        <h3>Business Benefits</h3>
+        <ul>
+          <li>Happier customers</li>
+          <li>Smoother demand flow</li>
+          <li>Demand forecast (# of watchers)</li>
+        </ul>
+      <p class='lead vspace'>Totally Free. Sign up here today...</p>
+    </div>
 
+    <div class='col-md-6'>
+        <%= render "shared/signup" %>
+    </div>
+</div>
