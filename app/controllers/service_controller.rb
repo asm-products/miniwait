@@ -1,6 +1,7 @@
 class ServiceController < ApplicationController
   def index
     @company = Company.find(params[:company_id])
+    @services = @company.services.order(:description)
   end
 
   def create
@@ -17,7 +18,7 @@ class ServiceController < ApplicationController
       # Create the new service for this company
       @company.services.create(:company_id => params[:company_id], :description => d, :is_primary => pri)
     end
-    render 'index'
+    redirect_to :action => 'index', :company_id => @company.id
   end
 
   def destroy
@@ -33,6 +34,6 @@ class ServiceController < ApplicationController
     slocs.each do |sloc|
 	    sloc.destroy()
     end
-    render 'index'
+    redirect_to :action => 'index', :company_id => @company.id
   end
 end

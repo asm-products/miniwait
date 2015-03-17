@@ -1,31 +1,31 @@
 
 <h2>Add Company</h2>
-<div class='text-info'>You are creating a service company profile. To select service companies to watch as a consumer, go <a href='#'>here.</a></div>
+<div class='text-info'>You are creating a service company profile. To select service companies to watch as a consumer, go <a href='/person/dashboard'>here.</a></div>
 
 <%= render 'shared/user_message' %>
 
 <form class="form-horizontal" role="form" action="/company/create" method="post">
   
   <div class="form-group">
-     <%= label_tag(:name, 'Company name:', :class => 'control-label col-sm-2') %>
+     <%= label_tag(:name, 'Company name:', :class => 'form-label col-sm-2') %>
      <div class="col-sm-4">
-        <%= text_field_tag(:name, @company.name, :class => 'form-control') %>
+        <%= text_field_tag(:name, @company.name, :class => 'form-control', :autofocus => true) %>
      </div>
   </div>
 
   <div class="form-group">
-     <%= label_tag(:category, 'Category:', :class => 'control-label col-sm-2') %>
+     <%= label_tag(:category, 'Category:', :class => 'form-label col-sm-2') %>
      <div class = 'col-sm-4'>
         <%= collection_select(nil, :category_id, Category.all, :id, :description, :include_blank => 'select') %>
      </div>
   </div>
 
   <div class="form-group">
-    <%= label_tag(:btn, '', :class => 'control-label col-sm-2') %>
-     <div class="col-sm-4">
-         <button type="submit" class="btn btn-default btn-primary">Continue</button>
-     </div>
+    <div class='col-sm-2 col-sm-offset-2'>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
   </div>
+
 </form>
 
 

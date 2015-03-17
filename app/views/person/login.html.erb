@@ -7,7 +7,7 @@
 
     <div class='form-group'>
       <%= label_tag(:username, "User name:", :class => 'form_label col-sm-2') %>
-      <%= text_field_tag(:username, nil, :class => 'form_field col-sm-3') %>
+      <%= text_field_tag(:username, nil, :class => 'form_field col-sm-3', :autofocus => true) %>
     </div>
 
     <div class='form-group'>
@@ -20,7 +20,9 @@
       <%= submit_tag("Log In", :class => 'btn btn-primary') %>
     </div>
 
-    <div class='text-muted vspace'>
+    <div class='spacer20'>&nbsp;</div>
+
+    <div class='text-muted'>
       Can't remember your login information? It happens. Click <%= link_to "here", :controller => "person", :action => "forgot_password" %> for help.
     </div>
 

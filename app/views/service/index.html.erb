@@ -1,33 +1,47 @@
 <h2><%= @company.name %></h2>
 <h3>Services</h3>
 <%= render 'shared/user_message' %>
-<div class="services_list">
-  <ol>
-    <%
-       @company.services.each do |svc|
-    %>
-        <li>
-          <%= svc.description %> <a href="/service/destroy?id=<%= svc.id %>">X</a> <%= ' primary' if svc.is_primary %>
-        </li>
+<div>
+<table class='table table-striped table-bordered table-auto'>
+  <% @services.each do |svc| %>
+      <tr>
+        <td class='col-sm-5'>
 
-    <%
-       end
-    %>
-  </ol>
+          <% if svc.is_primary %>
+            <strong><%= svc.description %></strong>
+          <% else %>
+              <%= svc.description %>
+          <% end %>
+        </td>
+        <td class ='col-sm-2'>
+          <a href="/service/destroy?id=<%= svc.id %>"><button  class="btn">Delete</button></a>
+        </td>
+      </tr>
+
+  <% end %>
+
+</table>
 </div>
+<div class='spacer20'>&nbsp;</div>
+<p class='text-info'>To add a new service, type in the name below. </p>
+
 <form class="form-horizontal" role="form" action="/service/create" method="post">
 
   <div class="form-group">
-    <%= label_tag(:description, 'Service:', :class => 'control-label col-sm-2') %>
-    <div class="col-sm-5">
-      <%= text_field_tag(:description, nil, :class => 'form-control') %>
+    <%= label_tag(:description, 'Service:', :class => 'control-label col-sm-1') %>
+    <div class="col-sm-3">
+      <%= text_field_tag(:description, nil, :class => 'form-control', :autofocus => true) %>
     </div>
   </div>
   <div class="form-group">
-    <%= label_tag(:btn, ' ', :class => 'control-label col-sm-2') %>
-    <button type="submit" class="btn btn-primary">Add</button>
+    <div class='col-sm-2 col-sm-offset-1'>
+        <button type="submit" class="btn btn-primary">Add</button>
+    </div>
   </div>
 
   <%= hidden_field_tag 'company_id', @company.id %>
 
 </form>
+<div class='spacer20'>&nbsp;</div>
+
+<p>Back to <a href="/company/edit?company_id=<%= @company.id %>">Company</a></p>

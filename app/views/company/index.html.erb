@@ -1,11 +1,11 @@
 <h2>My Companies</h2>
 <div class="company_list">
-  <ol>
+  <ul>
     <% @companies.each do |co| %>
         <li>
-          <%= link_to co.name, :controller => 'company', :action => 'edit', :company_id => co.id %>
+          <h4><%= link_to co.name, :controller => 'company', :action => 'edit', :company_id => co.id %></h4>
         </li>
 
     <% end %>
-  </ol>
+  </ul>
 </div>

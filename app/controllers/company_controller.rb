@@ -61,8 +61,6 @@ class CompanyController < ApplicationController
 
       # Clear user errors
       flash[:user_message] = nil
-      # Load company id for use by coming edit function
-      session[:company_id] = company.id
 
       # Edit this company profile
       redirect_to :controller => 'company', :action => 'edit', :company_id => company.id
@@ -96,8 +94,13 @@ class CompanyController < ApplicationController
   end
 
   def update
+     if params[:company_id].blank?
+        raise 'Update company attempted without id'
+     end
+
+
     # Update existing company
-    company = Company.find(session[:company_id])
+    company = Company.find(params[:company_id])
     warning_messages = Array.new
 
     # name
@@ -134,12 +137,10 @@ class CompanyController < ApplicationController
 
 
       # Clear user errors
-      flash[:user_message] = nil
-      # Load company id for use by coming edit function
-      session[:company_id] = company.id
+      flash[:user_message] = 'Company updated'
 
       # Edit this company profile
-      redirect_to :controller => 'company', :action => 'edit'
+      redirect_to :controller => 'company', :action => 'edit', :company_id => company.id
 
     else
 

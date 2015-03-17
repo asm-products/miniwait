@@ -1,48 +1,56 @@
-<div class='container'>
+<div>
 
-<h2>Search<small> ...for businesses in your area.</small></h2>
+  <h2>Business Search</h2>
 
-  <form class="form" role="form" action="/location/search" method="post">
+  <form class="form-horizontal" role="form" action="/location/search" method="post">
 
     <div class="form-group">
       <%= label_tag(:name, 'Company Name:', :class => 'form_label col-sm-2') %>
-      <%= text_field_tag(:name, @criteria[:name], :class => 'form_field', :placeholder => 'name or partial') %>
+      <%= text_field_tag(:name, @criteria[:name], :class => 'form_control', :placeholder => 'name or partial', :autofocus => true) %>
     </div>
 
-      <div class="form-group">
-        <%= label_tag(:category_id, 'Category:', :class => 'control-label col-sm-2') %>
-        <%= collection_select(nil, :category_id, Category.all, :id, :description, :selected => @criteria[:category_id], :include_blank => true, :class => 'form_field  col-sm-3') %>
-      </div>
+    <div class="form-group">
+      <%= label_tag(:category_id, 'Category:', :class => 'form-label col-sm-2') %>
+      <%= collection_select(nil, :category_id, Category.all, :id, :description, :selected => @criteria[:category_id], :include_blank => true, :class => 'form_control  col-sm-3') %>
+    </div>
 
-      <div class="form-group">
-        <%= label_tag(:near, 'Near:', :class => 'form_label col-sm-2') %>
-        <%= text_field_tag(:near, @criteria[:near], :class => 'form_field', :placeholder => 'address') %>
-      </div>
+    <div class="form-group">
+      <%= label_tag(:near, 'Near:', :class => 'form_label col-sm-2') %>
+      <%= text_field_tag(:near, @criteria[:near], :class => 'form_control', :placeholder => 'address') %>
+    </div>
 
-      <div class="form-group">
-        <%= label_tag(:distance, 'Distance:', :class => 'form_label col-sm-2') %>
-        <%= select_tag(:distance, options_for_select([5, 10, 20, 50, 100], @criteria[:distance]), :class => 'form_field') %>
-      </div>
+    <div class="form-group">
+      <%= label_tag(:distance, 'Distance:', :class => 'form_label col-sm-2') %>
+      <%= select_tag(:distance, options_for_select([5, 10, 20, 50, 100], @criteria[:distance]), :class => 'form_control') %>
+    </div>
 
-      <div class="form-group">
-        <%= label_tag(:btn, '', :class => 'form_label col-sm-2') %>
-        <%= submit_tag('Search', :class => 'btn btn-primary') %>
-      </div>
+    <div class="form-group">
+      <%= submit_tag('Search', :class => 'btn btn-primary col-sm-offset-2') %>
+    </div>
 
   </form>
-  <% if @results %>
+  <% if @results.size > 0 %>
+      <div class='spacer20'>&nbsp;</div>
       <h3>Search Results</h3>
-      <div class='row'>
-          <div class='col-sm-2'><strong>Company Name</strong></div><div class='col-sm-2'><strong>Category</strong></div><div class='col-sm-2'><strong>Location</strong></div><div class='col-sm-3'><strong>Address</strong></div><div class='col-sm-2'><strong>Distance (mi.)</strong></div>
-      </div>
+      <table class='table table-auto table-striped table-bordered'>
+        <tr>
+          <th>Company Name</th>
+          <th>Category</th>
+          <th>Location</th>
+          <th>Address</th>
+          <th>Distance (mi.)</th>
+        </tr>
         <% @results.each do |loc| %>
-            <div class='row'>
-                <div class='col-sm-2'><a href="/location/view?id=<%= loc[:id] %>"><%= loc[:company_name] %></a></div>
-                <div class='col-sm-2'><%= loc[:category_description] %></div>
-                <div class='col-sm-2'><%= loc[:loc_name] %></div>
-                <div class='col-sm-3'><%= loc[:address] %></div>
-                <div class='col-sm-2'><%= loc[:distance] %></div>
-            </div>
+            <tr>
+              <td class='col-sm-2'><a href="/location/view?id=<%= loc[:id] %>"><%= loc[:company_name] %></a></td>
+              <td class='col-sm-2'><%= loc[:category_description] %></td>
+              <td class='col-sm-2'><%= loc[:loc_name] %></td>
+              <td class='col-sm-3'><%= loc[:address] %></td>
+              <td class='col-sm-2'><%= loc[:distance] %></td>
+            </tr>
+
         <% end %> <!-- @results.each -->
+      </table>
+
   <% end %> <!-- if @results -->
 </div>

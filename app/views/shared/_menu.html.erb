@@ -28,9 +28,11 @@
                     <li><a href="/company/index">My Companies</a></li>
                 <% end %>
                 <li><a href="/person/logout">Log Out</a></li>
-                --- Testing Only ---
-                <li><a href="/category/index">Categories</a></li>
-                <li><a href="/person/index">People</a></li>
+                <% if @person.admin %>
+                    --- Testing Only ---
+                    <li><a href="/category/index">Categories</a></li>
+                    <li><a href="/person/index">People</a></li>
+                <% end %>
             </ul> <!-- dropdown-menu -->
         </li> <!-- dropdown -->
     <% end %>

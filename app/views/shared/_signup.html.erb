@@ -7,7 +7,7 @@
   <div class="form-group">
      <%= label_tag(:userName, "User name:", :class => 'control-label col-sm-3') %>
      <div class="col-sm-6">
-        <%= text_field_tag(:userName, @person.username, :class => 'form-control') %>
+        <%= text_field_tag(:userName, @person.username, :class => 'form-control', :autofocus => true) %>
      </div>
   </div>
 
