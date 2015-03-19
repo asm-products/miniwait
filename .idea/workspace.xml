@@ -4,27 +4,7 @@
     <option name="SCOPE_TYPE" value="10" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f99383c0-d527-4498-a3d5-96364588681b" name="Default" comment="">
-      <change type="DELETED" beforePath="C:\Users\Michael\waitkiller\app\assets\stylesheets\sticky_footer.css" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/shared/_menu.html.erb" afterPath="$PROJECT_DIR$/app/views/shared/_menu.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/shared/_signup.html.erb" afterPath="$PROJECT_DIR$/app/views/shared/_signup.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/application/about.html.erb" afterPath="$PROJECT_DIR$/app/views/application/about.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/layouts/application.html.erb" afterPath="$PROJECT_DIR$/app/views/layouts/application.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/company_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/company_controller.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/stylesheets/custom_global.css" afterPath="$PROJECT_DIR$/app/assets/stylesheets/custom_global.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/company/edit.html.erb" afterPath="$PROJECT_DIR$/app/views/company/edit.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/company/index.html.erb" afterPath="$PROJECT_DIR$/app/views/company/index.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/location/index.html.erb" afterPath="$PROJECT_DIR$/app/views/location/index.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/service/index.html.erb" afterPath="$PROJECT_DIR$/app/views/service/index.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/person/login.html.erb" afterPath="$PROJECT_DIR$/app/views/person/login.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/company/new.html.erb" afterPath="$PROJECT_DIR$/app/views/company/new.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/location/new.html.erb" afterPath="$PROJECT_DIR$/app/views/location/new.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/location/search.html.erb" afterPath="$PROJECT_DIR$/app/views/location/search.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/service_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/service_controller.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/initializers/session_store.rb" afterPath="$PROJECT_DIR$/config/initializers/session_store.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/home/show.html.erb" afterPath="$PROJECT_DIR$/app/views/home/show.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-    </list>
+    <list default="true" id="f99383c0-d527-4498-a3d5-96364588681b" name="Default" comment="" />
     <ignored path="waitkiller.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/tmp/" />

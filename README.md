@@ -1,4 +1,4 @@
-# Wait-Killer
+# MiniWait
 
 You're sick but you don't want to sit in the health clinic with other sick people for two hours. What if you knew when the wait time was small?
 
